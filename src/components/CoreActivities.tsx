@@ -3,40 +3,40 @@ import { Shield, Home, BookOpen } from 'lucide-react';
 
 export default function CoreActivities() {
   return (
-    <div className="w-full pt-24 mb-24" id="about">
-      <div className="flex justify-center mb-10">
-        <span className="eyebrow">About Us</span>
+    <div className="w-full pt-10 md:pt-12 mb-8 md:mb-10" id="about">
+      {/* Signature Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span className="eyebrow mb-2">About Us</span>
+          <h2 className="font-display text-[clamp(40px,6.5vw,68px)] text-ink uppercase leading-[.92] tracking-[.01em]">
+            Volunteer Driven<br />Movement<span className="inline-block w-3 h-3 bg-yellow align-baseline ml-1.5"></span>
+          </h2>
+        </div>
+        <p className="text-muted text-[15px] max-w-sm leading-relaxed md:pb-1">
+          Rescuing street animals, facilitating adoptions, and building a cruelty-free community across Bengaluru.
+        </p>
       </div>
       
-      <div className="text-center max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-display text-ink uppercase tracking-[.01em] leading-[1.1] mb-12">
-          We are a volunteer driven Organization.<br/>
-          <span className="text-muted text-[15px] font-sans tracking-normal normal-case block mt-6 max-w-2xl mx-auto font-normal">
-            What our organization does:
-          </span>
-        </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="brand-card rounded-[20px] p-8 flex flex-col items-center justify-center text-center gap-4">
+          <div className="text-yellow">
+            <Shield className="w-9 h-9" strokeWidth={1.5} />
+          </div>
+          <h4 className="font-display text-[22px] text-ink uppercase tracking-[.03em]">Animal Rescue</h4>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="brand-card p-10 flex flex-col items-center justify-center text-center gap-5">
-            <div className="text-yellow">
-              <Shield className="w-10 h-10" strokeWidth={1.5} />
-            </div>
-            <h4 className="font-display text-[22px] text-ink uppercase tracking-[.03em]">Animal Rescue</h4>
+        <div className="brand-card rounded-[20px] p-8 flex flex-col items-center justify-center text-center gap-4">
+          <div className="text-yellow">
+            <Home className="w-9 h-9" strokeWidth={1.5} />
           </div>
-          
-          <div className="brand-card p-10 flex flex-col items-center justify-center text-center gap-5">
-            <div className="text-yellow">
-              <Home className="w-10 h-10" strokeWidth={1.5} />
-            </div>
-            <h4 className="font-display text-[22px] text-ink uppercase tracking-[.03em]">Adoption</h4>
+          <h4 className="font-display text-[22px] text-ink uppercase tracking-[.03em]">Adoption</h4>
+        </div>
+        
+        <div className="brand-card rounded-[20px] p-8 flex flex-col items-center justify-center text-center gap-4">
+          <div className="text-yellow">
+            <BookOpen className="w-9 h-9" strokeWidth={1.5} />
           </div>
-          
-          <div className="brand-card p-10 flex flex-col items-center justify-center text-center gap-5">
-            <div className="text-yellow">
-              <BookOpen className="w-10 h-10" strokeWidth={1.5} />
-            </div>
-            <h4 className="font-display text-[22px] text-ink uppercase tracking-[.03em]">Education &<br/>Awareness</h4>
-          </div>
+          <h4 className="font-display text-[22px] text-ink uppercase tracking-[.03em]">Education &<br/>Awareness</h4>
         </div>
       </div>
     </div>

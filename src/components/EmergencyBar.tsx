@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PhoneCall, MessageSquare, Heart, X } from 'lucide-react';
+import { PhoneCall, MessageSquare, X } from 'lucide-react';
 
 export default function EmergencyBar() {
   const [collapsed, setCollapsed] = useState(false);
@@ -37,9 +37,8 @@ export default function EmergencyBar() {
 
       <a 
         href="#donate" 
-        className="flex items-center gap-1.5 bg-yellow text-ink px-3.5 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-[#e6be00] transition-colors"
+        className="flex items-center gap-1.5 bg-coral text-[#3a0f06] px-3.5 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-[#D6432A] transition-colors"
       >
-        <Heart className="w-3.5 h-3.5 fill-current" />
         Donate
       </a>
 

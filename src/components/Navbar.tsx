@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Heart } from 'lucide-react';
 
 export default function Navbar() {
   const [navScrolled, setNavScrolled] = useState(false);
@@ -34,13 +33,14 @@ export default function Navbar() {
           <a href="#about" className="hover:text-ink transition-colors duration-200">About Us</a>
           <a href="#activities" className="hover:text-ink transition-colors duration-200">Activities</a>
           <a href="#blogs" className="hover:text-ink transition-colors duration-200">Blogs</a>
+          <a href="#donate" className="hover:text-ink transition-colors duration-200">Donate</a>
           <a href="#volunteer" className="hover:text-ink transition-colors duration-200">Volunteer</a>
           <a href="#contact" className="hover:text-ink transition-colors duration-200">Contact</a>
         </div>
 
-        {/* CTA */}
-        <a href="#donate" className="bg-coral text-[#3a0f06] font-bold text-xs tracking-[.1em] uppercase py-2.5 px-5 rounded-full flex items-center gap-2 hover:bg-[#D6432A] transition-colors duration-200">
-          Donate Now <Heart className="w-3.5 h-3.5 fill-current" />
+        {/* CTA - Unified with Hero Banner Button (No Heart Symbol) */}
+        <a href="#donate" className="bg-coral text-[#3a0f06] font-bold text-xs tracking-[.14em] uppercase py-3 px-6 rounded-full hover:bg-[#D6432A] transition-colors duration-200 shadow-sm">
+          Donate Now
         </a>
       </div>
     </nav>

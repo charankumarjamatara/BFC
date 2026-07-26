@@ -9,7 +9,6 @@ import VolunteerMonth from './components/VolunteerMonth';
 import Activities from './components/Activities';
 import Blogs from './components/Blogs';
 import Donate from './components/Donate';
-import QRDonate from './components/QRDonate';
 import Volunteer from './components/Volunteer';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -26,7 +25,7 @@ export default function App() {
       {/* About Us Section */}
       <section id="about" className="px-6 container mx-auto max-w-[1180px] relative">
         <CoreActivities />
-        <div className="grid lg:grid-cols-12 gap-10 items-stretch pb-24">
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch pb-12 md:pb-16">
           <About />
           <MeetTeam />
         </div>
@@ -36,7 +35,6 @@ export default function App() {
       <Activities />
       <Blogs />
       <Donate />
-      <QRDonate />
       <Volunteer />
       <Contact />
       <Footer />
