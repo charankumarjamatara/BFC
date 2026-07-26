@@ -1,6 +1,9 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import MarqueeTicker from './components/MarqueeTicker';
+import ApplicationTiles from './components/ApplicationTiles';
+import BrandSystemShowcase from './components/BrandSystemShowcase';
 import About from './components/About';
 import CoreActivities from './components/CoreActivities';
 import MeetTeam from './components/MeetTeam';
@@ -12,6 +15,7 @@ import QRDonate from './components/QRDonate';
 import Volunteer from './components/Volunteer';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import EmergencyBar from './components/EmergencyBar';
 
 export default function App() {
   return (
@@ -19,8 +23,11 @@ export default function App() {
       <Navbar />
       <Hero />
       
-      {/* Spacer */}
-      <div className="h-16 md:h-28"></div>
+      <MarqueeTicker />
+      
+      <ApplicationTiles />
+
+      <BrandSystemShowcase />
       
       {/* About Us Section */}
       <section id="about" className="px-6 container mx-auto max-w-[1180px] relative">
@@ -39,6 +46,9 @@ export default function App() {
       <Volunteer />
       <Contact />
       <Footer />
+
+      {/* Floating Rescue Helpline Bar */}
+      <EmergencyBar />
     </div>
   );
 }
