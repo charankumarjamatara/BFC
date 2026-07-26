@@ -2,8 +2,6 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MarqueeTicker from './components/MarqueeTicker';
-import ApplicationTiles from './components/ApplicationTiles';
-import BrandSystemShowcase from './components/BrandSystemShowcase';
 import About from './components/About';
 import CoreActivities from './components/CoreActivities';
 import MeetTeam from './components/MeetTeam';
@@ -24,10 +22,6 @@ export default function App() {
       <Hero />
       
       <MarqueeTicker />
-      
-      <ApplicationTiles />
-
-      <BrandSystemShowcase />
       
       {/* About Us Section */}
       <section id="about" className="px-6 container mx-auto max-w-[1180px] relative">
