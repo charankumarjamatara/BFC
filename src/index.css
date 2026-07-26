@@ -1,36 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap');
 
 @import 'tailwindcss';
 
 @theme {
   --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  --font-display: 'Anton', sans-serif;
   
-  --color-forest: #1F4D3A;
-  --color-gold: #D8A031;
-  --color-warm-white: #FAF8F3;
-  --color-pure-white: #FFFFFF;
-  --color-beige: #F4EFE6;
-  --color-charcoal: #232323;
-  --color-muted: #6B6B6B;
+  --color-bg: #f8f8f8;
+  --color-surface: #ffffff;
+  --color-ink: #0A0A0A;
+  --color-yellow: #FFD400;
+  --color-white: #FFFFFF;
+  --color-coral: #FF5A3C;
+  --color-teal: #17B8A6;
+  --color-teal-dk: #0F8576;
+  --color-bone: #F4F1EA;
+  --color-muted: #5f6368;
+  --color-slate: #8a8d93;
+  --color-line: rgba(0,0,0,.14);
+  --color-line-soft: rgba(0,0,0,.08);
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-warm-white);
-  color: var(--color-charcoal);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-weight: 400;
 }
 
 /* Custom Scrollbar */
@@ -38,75 +41,47 @@ h1, h2, h3, h4, h5, h6 {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-warm-white);
+  background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-forest);
+  background: var(--color-ink);
   border-radius: 5px;
-  border: 3px solid var(--color-warm-white);
+  border: 2px solid var(--color-bg);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #143528;
+  background: #222;
 }
 
-/* Custom Shimmer Effect */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+/* Base styles for tags / pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 99px;
 }
 
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(216, 160, 49, 0.1) 25%,
-    rgba(216, 160, 49, 0.4) 37%,
-    rgba(216, 160, 49, 0.1) 63%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2.5s infinite linear;
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
 }
 
-/* Glowing border effect */
-.glow-border {
-  position: relative;
-  box-shadow: 0 0 15px rgba(216, 160, 49, 0.15);
-  border: 1px solid rgba(216, 160, 49, 0.3);
-}
-
-.glow-border::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(to bottom right, var(--color-gold), transparent, var(--color-forest));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* Curve dividers */
-.curve-divider-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.curve-divider-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
+.eyebrow::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  background: var(--color-yellow);
+  border-radius: 3px;
+  display: inline-block;
 }
 
 /* Smooth HTML scroll */
@@ -114,3 +89,10 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Utility to outline items (like cards) */
+.brand-card {
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 16px;
+  overflow: hidden;
+}

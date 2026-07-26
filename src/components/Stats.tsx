@@ -29,37 +29,30 @@ const CountUp = ({ to, duration = 2 }: { to: number; duration?: number }) => {
 
 export default function Stats() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 z-30 translate-y-1/2 px-6">
-      <div className="container mx-auto max-w-[1200px]">
-        <div className="bg-white rounded-3xl p-8 shadow-xl flex flex-col md:flex-row justify-between items-center gap-8 md:divide-x divide-gray-100 border border-gray-100">
-          <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
-            <div className="bg-beige p-4 rounded-2xl text-forest"><PawPrint className="w-7 h-7 fill-forest/20"/></div>
-            <div>
-              <div className="text-3xl font-serif font-bold text-forest"><CountUp to={50} />+</div>
-              <div className="text-xs font-semibold text-muted uppercase tracking-wider">Lives Rescued</div>
-            </div>
+    <div className="relative -mt-10 px-6 z-30">
+      <div className="container mx-auto max-w-[1180px]">
+        <div className="brand-card p-10 flex flex-col md:flex-row justify-between items-center gap-10 md:divide-x divide-line">
+          
+          <div className="flex flex-col items-center text-center w-full">
+            <div className="text-4xl md:text-[52px] font-display text-ink mb-1"><CountUp to={50} />+</div>
+            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Lives Rescued</div>
           </div>
-          <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start md:pl-12">
-            <div className="bg-beige p-4 rounded-2xl text-forest"><CheckCircle2 className="w-7 h-7"/></div>
-            <div>
-              <div className="text-3xl font-serif font-bold text-forest"><CountUp to={100} />+</div>
-              <div className="text-xs font-semibold text-muted uppercase tracking-wider">Indies Collared</div>
-            </div>
+
+          <div className="flex flex-col items-center text-center w-full">
+            <div className="text-4xl md:text-[52px] font-display text-ink mb-1"><CountUp to={100} />+</div>
+            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Indies Collared</div>
           </div>
-          <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start md:pl-12">
-            <div className="bg-beige p-4 rounded-2xl text-forest"><Heart className="w-7 h-7 fill-forest/20"/></div>
-            <div>
-              <div className="text-3xl font-serif font-bold text-forest"><CountUp to={56} />+</div>
-              <div className="text-xs font-semibold text-muted uppercase tracking-wider">Indies Fed Daily</div>
-            </div>
+
+          <div className="flex flex-col items-center text-center w-full">
+            <div className="text-4xl md:text-[52px] font-display text-ink mb-1"><CountUp to={56} />+</div>
+            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Indies Fed Daily</div>
           </div>
-          <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start md:pl-12">
-            <div className="bg-beige p-4 rounded-2xl text-forest"><Users className="w-7 h-7"/></div>
-            <div>
-              <div className="text-3xl font-serif font-bold text-forest">Growing</div>
-              <div className="text-xs font-semibold text-muted uppercase tracking-wider">Volunteer Network</div>
-            </div>
+
+          <div className="flex flex-col items-center text-center w-full">
+            <div className="text-4xl md:text-[52px] font-display text-ink mb-1 tracking-normal">Growing</div>
+            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Volunteer Network</div>
           </div>
+
         </div>
       </div>
     </div>

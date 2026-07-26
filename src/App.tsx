@@ -15,15 +15,15 @@ import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <div className="bg-[#FAF8F3] text-[#232323] overflow-x-hidden min-h-screen font-sans scroll-smooth">
+    <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth">
       <Navbar />
       <Hero />
       
       {/* Spacer */}
-      <div className="h-28"></div>
+      <div className="h-16 md:h-28"></div>
       
       {/* About Us Section */}
-      <section id="about" className="px-6 container mx-auto max-w-[1440px] relative">
+      <section id="about" className="px-6 container mx-auto max-w-[1180px] relative">
         <CoreActivities />
         <div className="grid lg:grid-cols-12 gap-10 items-stretch pb-24">
           <About />
