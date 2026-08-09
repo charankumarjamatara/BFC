@@ -1,10 +1,10 @@
 import React from 'react';
-import { Clock, MapPin, PawPrint, MessageSquare } from 'lucide-react';
+import { Clock, MapPin, PawPrint, FileText } from 'lucide-react';
 
 export default function Volunteer() {
   return (
-    <section id="volunteer" className="py-12 md:py-16 px-6 bg-surface border-y border-line-soft">
-      <div className="container mx-auto max-w-[1180px]">
+    <section id="volunteer" className="section-wrapper bg-surface border-b-0">
+      <div className="section-container">
         
         {/* Signature Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
@@ -52,14 +52,19 @@ export default function Volunteer() {
               </div>
             </div>
             
-            <a 
-              href="https://wa.me/919845012345" 
-              target="_blank" 
-              rel="noreferrer"
-              className="bg-ink text-teal font-bold text-xs uppercase tracking-[.14em] py-3.5 px-7 rounded-full flex items-center justify-center gap-2 hover:bg-[#222] transition-colors self-start"
-            >
-              <MessageSquare className="w-4 h-4" /> Chat on WhatsApp
-            </a>
+            <div className="space-y-4">
+              <p className="text-ink font-medium text-[14.5px]">
+                Fill the form in 2 mins to lend a hand for the cause
+              </p>
+              <a 
+                href="#" 
+                target="_blank" 
+                rel="noreferrer"
+                className="btn-outline self-start inline-flex"
+              >
+                <FileText className="w-4 h-4" /> Fill Google Form
+              </a>
+            </div>
           </div>
 
           {/* Right: What Our Volunteers Say */}

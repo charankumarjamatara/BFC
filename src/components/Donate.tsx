@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Heart, ArrowRight, AlertTriangle, ShieldCheck, PawPrint, Sparkles } from 'lucide-react';
+import impactDogBg from '../assets/impact_dog_bg.png';
 
 export default function Donate() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(500);
@@ -12,8 +13,8 @@ export default function Donate() {
   ];
 
   return (
-    <section id="donate" className="py-12 md:py-16 px-6 container mx-auto max-w-[1180px]">
-      
+    <section id="donate" className="section-wrapper">
+      <div className="section-container">
       {/* Signature Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
@@ -22,95 +23,50 @@ export default function Donate() {
             Where Your<br />Help Goes<span className="inline-block w-3 h-3 bg-yellow align-baseline ml-1.5"></span>
           </h2>
         </div>
-        <p className="text-muted text-[15px] max-w-sm leading-relaxed md:pb-1">
-          Direct, immediate impact. Choose an active rescue case or support our daily feeding & medical runs in Bengaluru.
-        </p>
       </div>
 
-      {/* 3 Scene Urgency Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-        
-        {/* Scene 1: Signal Coral Urgent Rescue */}
-        <div className="bg-ink rounded-[20px] p-7 lg:p-8 flex flex-col justify-between border border-line relative overflow-hidden">
-          <div>
-            <div className="flex justify-between items-center mb-5">
+      {/* Single Urgency Card */}
+      <div className="mb-10">
+        <div className="bg-ink rounded-[20px] p-7 lg:p-10 border border-line relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
+          {/* Left side content */}
+          <div className="md:w-1/2">
+            <div className="flex justify-between items-center mb-5 md:justify-start md:gap-4">
               <span className="bg-coral text-[#3a0f06] font-bold text-[10px] tracking-[.14em] uppercase px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
                 <AlertTriangle className="w-3.5 h-3.5" /> Rescue Alert
               </span>
               <span className="text-[11px] font-bold text-coral uppercase tracking-wider">Urgent</span>
             </div>
 
-            <h3 className="font-display text-4xl text-white uppercase leading-[.92] tracking-[.01em] mb-3">
+            <h3 className="font-display text-4xl lg:text-5xl text-white uppercase leading-[.92] tracking-[.01em] mb-4">
               Bruno Needs<br />Surgery <span className="text-coral">Today</span>
             </h3>
 
-            <p className="text-[#bfc1c5] text-[14px] leading-relaxed mb-6">
+            <p className="text-[#bfc1c5] text-[15px] leading-relaxed max-w-md">
               Severe hind leg fracture after a hit-and-run in Indiranagar. Surgery scheduled for 4 PM.
             </p>
           </div>
 
-          <a 
-            href="#contact" 
-            className="bg-coral text-[#3a0f06] font-bold text-[12px] uppercase tracking-[.14em] py-3.5 px-6 rounded-full flex items-center justify-center gap-2 hover:bg-[#D6432A] transition-colors w-full mt-2"
-          >
-            Donate to Bruno <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* Scene 2: Hope Teal Medical & Vaccine Fund */}
-        <div className="bg-teal rounded-[20px] p-7 lg:p-8 flex flex-col justify-between border border-line relative overflow-hidden">
-          <div>
-            <div className="flex justify-between items-center mb-5">
-              <span className="bg-[#0a574e] text-[#8fe0d6] font-bold text-[10px] tracking-[.14em] uppercase px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5" /> Medical Care
-              </span>
-              <span className="text-[11px] font-bold text-[#04332d] uppercase tracking-wider">Active</span>
+          {/* Right side tracker and button */}
+          <div className="md:w-5/12 flex flex-col gap-6">
+            {/* Money Tracker */}
+            <div className="w-full">
+              <div className="flex justify-between text-[11px] font-bold text-[#bfc1c5] mb-2.5 uppercase tracking-widest">
+                <span className="text-white">Raised: ₹45,000</span>
+                <span>Goal: ₹60,000</span>
+              </div>
+              <div className="w-full h-3 bg-[#2e2e2e] rounded-full overflow-hidden">
+                <div className="h-full bg-coral rounded-full" style={{ width: '75%' }}></div>
+              </div>
             </div>
 
-            <h3 className="font-display text-4xl text-[#04332d] uppercase leading-[.92] tracking-[.01em] mb-3">
-              Medicine &<br />Vaccine <span className="text-[#0a574e]">Drive</span>
-            </h3>
-
-            <p className="text-[#0a574e] text-[14px] leading-relaxed mb-6 font-medium">
-              Anti-rabies vaccines, deworming, and wound dressing kits for 50+ neighborhood indies.
-            </p>
+            <a 
+              href="#contact" 
+              className="btn-primary w-full"
+            >
+              Donate to Bruno <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
-
-          <a 
-            href="#contact" 
-            className="bg-ink text-teal font-bold text-[12px] uppercase tracking-[.14em] py-3.5 px-6 rounded-full flex items-center justify-center gap-2 hover:bg-[#222] transition-colors w-full mt-2"
-          >
-            Sponsor Care <ArrowRight className="w-4 h-4" />
-          </a>
         </div>
-
-        {/* Scene 3: Electric Yellow Daily Feeding & Collar Drive */}
-        <div className="bg-yellow rounded-[20px] p-7 lg:p-8 flex flex-col justify-between border border-line relative overflow-hidden">
-          <div>
-            <div className="flex justify-between items-center mb-5">
-              <span className="bg-ink text-yellow font-bold text-[10px] tracking-[.14em] uppercase px-3 py-1.5 rounded-full inline-flex items-center gap-1.5">
-                <PawPrint className="w-3.5 h-3.5" /> Daily Impact
-              </span>
-              <span className="text-[11px] font-bold text-ink uppercase tracking-wider">Ongoing</span>
-            </div>
-
-            <h3 className="font-display text-4xl text-ink uppercase leading-[.92] tracking-[.01em] mb-3">
-              Feed 56+ Indies<br /><span className="text-[#5c4d00]">Every Day</span>
-            </h3>
-
-            <p className="text-[#5c4d00] text-[14px] leading-relaxed mb-6 font-medium">
-              Nutritious cooked meals and reflective glow collars for night-time safety across 4 routes.
-            </p>
-          </div>
-
-          <a 
-            href="#contact" 
-            className="bg-ink text-yellow font-bold text-[12px] uppercase tracking-[.14em] py-3.5 px-6 rounded-full flex items-center justify-center gap-2 hover:bg-[#222] transition-colors w-full mt-2"
-          >
-            Support Feeding <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
       </div>
 
       {/* Main Donation Container Card */}
@@ -120,29 +76,28 @@ export default function Donate() {
           {/* Left Column: Banner + Quick Contribution Selector */}
           <div className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              {/* Warm Hero Banner */}
-              <div className="bg-[#FAF8F3] rounded-[16px] p-6 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between mb-6 border border-line-soft">
-                <div className="flex-1 pr-4">
-                  <span className="eyebrow mb-2">Make An Impact</span>
-                  <h3 className="font-display text-2xl lg:text-3xl text-ink uppercase leading-[.95] mb-2">
+              {/* Warm Hero Banner with Background Image */}
+              <div 
+                className="rounded-[16px] p-6 lg:p-8 relative overflow-hidden mb-6 border border-line-soft min-h-[220px] flex items-center"
+                style={{
+                  backgroundImage: `url(${impactDogBg})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                
+                <div className="relative z-10 max-w-[80%] md:max-w-[70%]">
+                  <span className="eyebrow mb-2 text-white/90">Make An Impact</span>
+                  <h3 className="font-display text-2xl lg:text-3xl text-white uppercase leading-[.95] mb-2">
                     Your Support,<br />
                     Their <span className="bg-yellow text-ink px-1.5 pb-0.5 box-decoration-clone inline-block">Second Chance.</span>
                   </h3>
-                  <div className="w-10 h-0.5 bg-ink mb-2"></div>
-                  <p className="text-muted text-[13px] leading-relaxed">
+                  <div className="w-10 h-0.5 bg-yellow mb-2"></div>
+                  <p className="text-[#e2e2e2] text-[13px] leading-relaxed">
                     Choose an amount and help us create a better tomorrow for animals in need.
                   </p>
-                </div>
-
-                <div className="relative mt-4 sm:mt-0 shrink-0">
-                  <img 
-                    src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=400&q=80" 
-                    alt="Happy dog second chance" 
-                    className="w-28 h-28 rounded-full object-cover border-4 border-yellow shadow-sm"
-                  />
-                  <div className="absolute -top-1.5 -right-1.5 bg-yellow text-ink w-7 h-7 rounded-full flex items-center justify-center font-bold">
-                    <Sparkles className="w-3.5 h-3.5" />
-                  </div>
                 </div>
               </div>
 
@@ -168,7 +123,7 @@ export default function Donate() {
                 </div>
 
                 {selectedAmount && (
-                  <div className="bg-[#FAF8F3] border border-line rounded-[14px] p-4 flex items-center gap-3">
+                  <div className="bg-bg border border-line rounded-[14px] p-4 flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-yellow text-ink flex items-center justify-center font-bold shrink-0">
                       <Heart className="w-4 h-4 fill-current" />
                     </div>
@@ -232,6 +187,7 @@ export default function Donate() {
         </div>
       </div>
 
+      </div>
     </section>
   );
 }

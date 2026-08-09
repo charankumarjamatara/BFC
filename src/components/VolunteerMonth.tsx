@@ -1,9 +1,11 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import volunteerImg from '../assets/volunteer.jpg';
 
 export default function VolunteerMonth() {
   return (
-    <section className="py-12 md:py-16 px-6 container mx-auto max-w-[1180px]">
+    <section className="section-wrapper">
+      <div className="section-container">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
@@ -12,17 +14,14 @@ export default function VolunteerMonth() {
             Meet<br />Maya<span className="inline-block w-3 h-3 bg-yellow align-baseline ml-1.5"></span>
           </h2>
         </div>
-        <p className="text-muted text-[15px] max-w-sm leading-relaxed md:pb-1">
-          A regular two-hour shift became the kind of steady care that changes an animal's whole recovery.
-        </p>
       </div>
 
       {/* Card Split */}
       <div className="grid md:grid-cols-12 overflow-hidden border border-line rounded-[20px]">
         {/* Left Side: Photo */}
-        <div className="md:col-span-6 lg:col-span-7 relative min-h-[360px] md:min-h-[460px]">
+        <div className="md:col-span-6 lg:col-span-7 relative aspect-[4/3]">
           <img 
-            src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?auto=format&fit=crop&w=1000&q=80" 
+            src={volunteerImg}
             alt="Maya Prakash - Volunteer of the Month" 
             className="w-full h-full object-cover"
           />
@@ -41,38 +40,16 @@ export default function VolunteerMonth() {
             <p className="text-[#bfc1c5] text-[14px] leading-relaxed mb-6">
               Maya shows up before work to walk, feed and calm the newest arrivals. Her gentleness gives them a reason to trust people again.
             </p>
-
-            {/* 2x2 Stats Grid with Divider lines */}
-            <div className="border-t border-b border-[#2e2e2e] py-5 my-5 grid grid-cols-2 gap-y-5 gap-x-4">
-              <div>
-                <div className="font-display text-2xl lg:text-3xl text-yellow">42 hours</div>
-                <div className="text-[11px] text-[#8e8e93] uppercase tracking-wider mt-0.5">This month</div>
-              </div>
-
-              <div>
-                <div className="font-display text-2xl lg:text-3xl text-yellow">11 animals</div>
-                <div className="text-[11px] text-[#8e8e93] uppercase tracking-wider mt-0.5">Supported</div>
-              </div>
-
-              <div>
-                <div className="font-display text-2xl lg:text-3xl text-yellow">3 drives</div>
-                <div className="text-[11px] text-[#8e8e93] uppercase tracking-wider mt-0.5">Coordinated</div>
-              </div>
-
-              <div>
-                <div className="font-display text-2xl lg:text-3xl text-yellow">Since 2025</div>
-                <div className="text-[11px] text-[#8e8e93] uppercase tracking-wider mt-0.5">With BFC</div>
-              </div>
-            </div>
           </div>
 
           <a 
             href="#volunteer" 
-            className="bg-yellow text-ink font-bold text-[12px] uppercase tracking-[.14em] py-3.5 px-6 rounded-full flex items-center justify-center gap-2 hover:bg-[#e6be00] transition-colors mt-2 w-full"
+            className="btn-primary w-full mt-2"
           >
             Become a volunteer <ArrowRight className="w-4 h-4" />
           </a>
         </div>
+      </div>
       </div>
     </section>
   );

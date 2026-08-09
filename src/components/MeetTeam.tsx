@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function MeetTeam() {
+export default function MeetTeam({ fullPage = false }: { fullPage?: boolean }) {
   return (
-    <div className="lg:col-span-6 flex flex-col justify-between h-full bg-surface rounded-[20px] p-7 lg:p-10 border border-line relative">
+    <div className={`${fullPage ? 'max-w-4xl mx-auto w-full' : 'lg:col-span-6'} flex flex-col justify-between h-full bg-surface rounded-[20px] p-7 lg:p-10 border border-line relative`}>
       <div>
         {/* Yellow Dot & Title */}
         <div className="mb-6">
@@ -16,7 +16,7 @@ export default function MeetTeam() {
         <div className="grid md:grid-cols-2 gap-4 mb-5">
           
           {/* Founder */}
-          <div className="bg-[#F9F9F9] rounded-[16px] p-4 lg:p-5 border border-line-soft flex flex-col justify-between">
+          <div className="bg-bg rounded-[16px] p-4 lg:p-5 border border-line-soft flex flex-col justify-between">
             <div className="flex items-center gap-3.5">
               <img 
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" 
@@ -35,7 +35,7 @@ export default function MeetTeam() {
           </div>
           
           {/* Co-founder */}
-          <div className="bg-[#F9F9F9] rounded-[16px] p-4 lg:p-5 border border-line-soft flex flex-col justify-between">
+          <div className="bg-bg rounded-[16px] p-4 lg:p-5 border border-line-soft flex flex-col justify-between">
             <div className="flex items-center gap-3.5">
               <img 
                 src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" 
@@ -56,7 +56,7 @@ export default function MeetTeam() {
         </div>
         
         {/* Bottom Row: Managing Team Card */}
-        <div className="bg-[#F9F9F9] rounded-[16px] p-5 border border-line-soft">
+        <div className="bg-bg rounded-[16px] p-5 border border-line-soft">
           <h3 className="font-display text-xl text-ink uppercase text-center mb-4 tracking-[.02em]">
             Managing Team<span className="inline-block w-2.5 h-2.5 bg-yellow align-baseline ml-1"></span>
           </h3>

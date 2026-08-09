@@ -12,8 +12,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-16 px-6 container mx-auto max-w-[1180px]">
-      
+    <section id="contact" className="section-wrapper">
+      <div className="section-container">
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
@@ -120,7 +120,7 @@ export default function Contact() {
                   type="text" 
                   required
                   placeholder="Your name"
-                  className="w-full bg-[#FAF8F3] border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate"
+                  className="w-full bg-bg border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate"
                 />
               </div>
               
@@ -131,7 +131,7 @@ export default function Contact() {
                   type="email" 
                   required
                   placeholder="you@email.com"
-                  className="w-full bg-[#FAF8F3] border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate"
+                  className="w-full bg-bg border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate"
                 />
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function Contact() {
                 id="ct-subject"
                 type="text" 
                 placeholder="How can we help?"
-                className="w-full bg-[#FAF8F3] border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate"
+                className="w-full bg-bg border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate"
               />
             </div>
 
@@ -153,19 +153,20 @@ export default function Contact() {
                 rows={4}
                 required
                 placeholder="Tell us what is on your mind."
-                className="w-full bg-[#FAF8F3] border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate resize-none"
+                className="w-full bg-bg border border-line-soft rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate resize-none"
               ></textarea>
             </div>
 
             <button 
               type="submit"
-              className="bg-ink text-yellow font-bold text-xs uppercase tracking-[.14em] py-3.5 px-7 rounded-full hover:bg-[#222] transition-colors inline-flex items-center gap-2 mt-2"
+              className="btn-outline mt-2"
             >
               Send message <ArrowRight className="w-4 h-4" />
             </button>
           </form>
         </div>
 
+      </div>
       </div>
     </section>
   );

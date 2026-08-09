@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Sun, Moon } from 'lucide-react';
 
 export default function Navbar() {
   const [navScrolled, setNavScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,10 +52,20 @@ export default function Navbar() {
           <a href="#contact" className="hover:text-ink transition-colors duration-200">Contact</a>
         </div>
 
-        {/* CTA - Unified with Hero Banner Button (No Heart Symbol) */}
-        <a href="#donate" className="bg-coral text-[#3a0f06] font-bold text-xs tracking-[.14em] uppercase py-3 px-6 rounded-full hover:bg-[#D6432A] transition-colors duration-200 shadow-sm">
-          Donate Now
-        </a>
+        {/* CTA & Theme Toggle */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink hover:bg-yellow hover:border-yellow transition-colors cursor-pointer"
+            aria-label="Toggle Dark Mode"
+          >
+            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+          
+          <a href="#donate" className="btn-primary !py-3 !px-6">
+            Donate Now
+          </a>
+        </div>
       </div>
     </nav>
   );

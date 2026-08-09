@@ -28,31 +28,22 @@ const CountUp = ({ to, duration = 2 }: { to: number; duration?: number }) => {
 
 export default function Stats() {
   return (
-    <div className="relative -mt-6 px-6 z-30">
-      <div className="container mx-auto max-w-[1180px]">
-        <div className="brand-card p-6 md:p-8 rounded-[20px] flex flex-col md:flex-row justify-between items-center gap-6 md:divide-x divide-line">
-          
-          <div className="flex flex-col items-center text-center w-full">
-            <div className="text-4xl md:text-[48px] font-display text-ink mb-0.5"><CountUp to={50} />+</div>
-            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Lives Rescued</div>
-          </div>
-
-          <div className="flex flex-col items-center text-center w-full">
-            <div className="text-4xl md:text-[48px] font-display text-ink mb-0.5"><CountUp to={100} />+</div>
-            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Indies Collared</div>
-          </div>
-
-          <div className="flex flex-col items-center text-center w-full">
-            <div className="text-4xl md:text-[48px] font-display text-ink mb-0.5"><CountUp to={56} />+</div>
-            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Indies Fed Daily</div>
-          </div>
-
-          <div className="flex flex-col items-center text-center w-full">
-            <div className="text-4xl md:text-[48px] font-display text-ink mb-0.5 tracking-normal">Growing</div>
-            <div className="text-[11px] font-semibold text-muted uppercase tracking-[.14em]">Volunteer Network</div>
-          </div>
-
-        </div>
+    <div className="grid grid-cols-2 gap-x-8 gap-y-10 max-w-xl">
+      <div className="flex flex-col items-start w-full">
+        <div className="text-4xl md:text-[56px] font-display text-ink mb-1"><CountUp to={50} />+</div>
+        <div className="text-[12px] font-bold text-muted uppercase tracking-[.14em]">Lives Rescued</div>
+      </div>
+      <div className="flex flex-col items-start w-full">
+        <div className="text-4xl md:text-[56px] font-display text-ink mb-1"><CountUp to={100} />+</div>
+        <div className="text-[12px] font-bold text-muted uppercase tracking-[.14em]">Indies Collared</div>
+      </div>
+      <div className="flex flex-col items-start w-full">
+        <div className="text-4xl md:text-[56px] font-display text-ink mb-1"><CountUp to={56} />+</div>
+        <div className="text-[12px] font-bold text-muted uppercase tracking-[.14em]">Indies Fed Daily</div>
+      </div>
+      <div className="flex flex-col items-start w-full">
+        <div className="text-4xl md:text-[56px] font-display text-ink mb-1 tracking-normal">Growing</div>
+        <div className="text-[12px] font-bold text-muted uppercase tracking-[.14em]">Volunteer Network</div>
       </div>
     </div>
   );
