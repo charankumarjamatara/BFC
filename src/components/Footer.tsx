@@ -4,7 +4,7 @@ import { PawPrint, Users, MessageSquare } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="bg-ink text-white pt-20 pb-8 relative overflow-hidden border-t border-[#333]">
-      <div className="container mx-auto max-w-[1180px] px-6">
+      <div className="section-container">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-12 border-b border-[#333] pb-16">
           
           {/* Branding Column */}
@@ -18,15 +18,15 @@ export default function Footer() {
                 <span className="text-yellow text-[13px] tracking-[.14em] font-sans font-bold block mt-1">COMMUNITY</span>
               </div>
             </a>
-            <p className="text-[14px] text-[#8e8e93] max-w-sm leading-relaxed">
+            <p className="text-[14.5px] text-[#8e8e93] max-w-sm leading-relaxed">
               Empowering neighborhoods across Bangalore to rescue, rehabilitate, feed, and collar local street animals. Together, we build a kind community.
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="col-span-1 md:col-span-2 space-y-5">
-            <h4 className="font-display text-yellow text-xl uppercase tracking-wider">Quick Links</h4>
-            <ul className="space-y-3 text-[14px] text-[#8e8e93]">
+            <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Quick Links</h4>
+            <ul className="space-y-3 text-[14.5px] text-[#8e8e93]">
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="#activities" className="hover:text-white transition-colors">Activities</a></li>
               <li><a href="#blogs" className="hover:text-white transition-colors">Blogs</a></li>
@@ -36,8 +36,8 @@ export default function Footer() {
 
           {/* Programs */}
           <div className="col-span-1 md:col-span-2 space-y-5">
-            <h4 className="font-display text-yellow text-xl uppercase tracking-wider">Programs</h4>
-            <ul className="space-y-3 text-[14px] text-[#8e8e93]">
+            <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Programs</h4>
+            <ul className="space-y-3 text-[14.5px] text-[#8e8e93]">
               <li><a href="#activities" className="hover:text-white transition-colors">Animal Rescue</a></li>
               <li><a href="#activities" className="hover:text-white transition-colors">Feeding Drives</a></li>
               <li><a href="#activities" className="hover:text-white transition-colors">Collar Drives</a></li>
@@ -47,8 +47,8 @@ export default function Footer() {
 
           {/* Contact Details in Footer */}
           <div className="col-span-2 md:col-span-4 space-y-5">
-            <h4 className="font-display text-yellow text-xl uppercase tracking-wider">Helpline Support</h4>
-            <p className="text-[14px] text-[#8e8e93] leading-relaxed">
+            <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Helpline Support</h4>
+            <p className="text-[14.5px] text-[#8e8e93] leading-relaxed">
               Emergency Hotline: +91 98450 12345<br/>
               Office Address: Indiranagar, Bangalore, KA, India<br/>
               Email: rescue@brutalityfreecommunity.org

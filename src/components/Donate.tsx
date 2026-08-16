@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Heart, ArrowRight, AlertTriangle, ShieldCheck, PawPrint, Sparkles } from 'lucide-react';
 import impactDogBg from '../assets/impact_dog_bg.png';
 
-export default function Donate() {
+interface DonateProps {
+  onDonateClick?: () => void;
+}
+
+export default function Donate({ onDonateClick }: DonateProps) {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(500);
 
   const donationTiers = [
@@ -59,128 +63,88 @@ export default function Donate() {
               </div>
             </div>
 
-            <a 
-              href="#contact" 
-              className="btn-primary w-full"
+            <button 
+              onClick={onDonateClick}
+              className="btn-primary w-full text-center"
             >
-              Donate to Bruno <ArrowRight className="w-4 h-4" />
-            </a>
+              Donate to Bruno <ArrowRight className="w-4 h-4 ml-1.5" />
+            </button>
           </div>
         </div>
       </div>
 
       {/* Main Donation Container Card */}
       <div className="bg-surface rounded-[20px] border border-line p-6 lg:p-8">
-        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           
-          {/* Left Column: Banner + Quick Contribution Selector */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
-            <div>
-              {/* Warm Hero Banner with Background Image */}
-              <div 
-                className="rounded-[16px] p-6 lg:p-8 relative overflow-hidden mb-6 border border-line-soft min-h-[220px] flex items-center"
-                style={{
-                  backgroundImage: `url(${impactDogBg})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                {/* Gradient overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-                
-                <div className="relative z-10 max-w-[80%] md:max-w-[70%]">
-                  <span className="eyebrow mb-2 text-white/90">Make An Impact</span>
-                  <h3 className="font-display text-2xl lg:text-3xl text-white uppercase leading-[.95] mb-2">
-                    Your Support,<br />
-                    Their <span className="bg-yellow text-ink px-1.5 pb-0.5 box-decoration-clone inline-block">Second Chance.</span>
-                  </h3>
-                  <div className="w-10 h-0.5 bg-yellow mb-2"></div>
-                  <p className="text-[#e2e2e2] text-[13px] leading-relaxed">
-                    Choose an amount and help us create a better tomorrow for animals in need.
-                  </p>
-                </div>
-              </div>
-
-              {/* Quick Contribution Selector */}
-              <div>
-                <span className="eyebrow mb-2">Quick Contribution</span>
-                <h4 className="font-display text-2xl text-ink uppercase mb-3">Select An Amount</h4>
-
-                <div className="flex flex-wrap gap-2.5 mb-4">
-                  {donationTiers.map((tier) => (
-                    <button
-                      key={tier.amount}
-                      onClick={() => setSelectedAmount(tier.amount)}
-                      className={`px-5 py-2 rounded-full font-display text-base transition-all border ${
-                        selectedAmount === tier.amount 
-                          ? 'bg-ink text-yellow border-ink shadow-sm' 
-                          : 'bg-bg text-ink border-line hover:border-ink'
-                      }`}
-                    >
-                      ₹{tier.amount.toLocaleString()}
-                    </button>
-                  ))}
-                </div>
-
-                {selectedAmount && (
-                  <div className="bg-bg border border-line rounded-[14px] p-4 flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-yellow text-ink flex items-center justify-center font-bold shrink-0">
-                      <Heart className="w-4 h-4 fill-current" />
-                    </div>
-                    <div>
-                      <span className="font-bold text-ink text-[13.5px]">₹{selectedAmount.toLocaleString()} — {donationTiers.find(t => t.amount === selectedAmount)?.label}</span>
-                      <p className="text-muted text-[11.5px]">{donationTiers.find(t => t.amount === selectedAmount)?.desc}</p>
-                    </div>
-                  </div>
-                )}
+          {/* Left Column: Banner */}
+          <div className="flex flex-col h-full">
+            {/* Warm Hero Banner with Background Image */}
+            <div 
+              className="rounded-[16px] p-6 lg:p-10 relative overflow-hidden border border-line-soft min-h-[320px] h-full flex flex-col justify-end"
+              style={{
+                backgroundImage: `url(${impactDogBg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              {/* Gradient overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+              
+              <div className="relative z-10 w-full md:max-w-[90%]">
+                <span className="eyebrow mb-3 text-white/90">Make An Impact</span>
+                <h3 className="font-display text-3xl lg:text-5xl text-white uppercase leading-[.95] mb-4">
+                  Your Support,<br />
+                  Their <span className="bg-yellow text-ink px-2 pb-1 box-decoration-clone inline-block mt-1">Second Chance.</span>
+                </h3>
+                <div className="w-12 h-1 bg-yellow mb-4"></div>
+                <p className="text-[#e2e2e2] text-sm lg:text-base leading-relaxed">
+                  Choose an amount and help us create a better tomorrow for animals in need.
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Right Column: QR Code */}
-          <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-dashed border-line pt-6 lg:pt-0 lg:pl-6 flex flex-col justify-center">
+          {/* Right Column: Quick Contribution Selector */}
+          <div className="flex flex-col justify-center lg:pl-6 border-t lg:border-t-0 lg:border-l border-dashed border-line pt-6 lg:pt-0">
             <div>
-              <span className="eyebrow mb-2">Support The Movement</span>
-              <h3 className="font-display text-2xl lg:text-3xl text-ink uppercase leading-[.95] mb-5">
-                Every Donation<br />
-                Creates A<br />
-                <span className="text-yellow">Second Chance.</span>
-              </h3>
+              <span className="eyebrow mb-2">Quick Contribution</span>
+              <h4 className="font-display text-2xl lg:text-3xl text-ink uppercase mb-5">Select An Amount</h4>
 
-              {/* QR Code Container */}
-              <div className="bg-surface p-4 rounded-xl border border-line max-w-[210px] mx-auto text-center shadow-sm">
-                <div className="w-36 h-36 bg-[#F4F1EA] flex items-center justify-center relative overflow-hidden rounded-lg mx-auto">
-                  <svg className="w-full h-full text-ink" viewBox="0 0 100 100" fill="currentColor">
-                    <rect x="0" y="0" width="25" height="25" />
-                    <rect x="5" y="5" width="15" height="15" fill="white" />
-                    <rect x="9" y="9" width="7" height="7" />
-                    
-                    <rect x="75" y="0" width="25" height="25" />
-                    <rect x="80" y="5" width="15" height="15" fill="white" />
-                    <rect x="84" y="9" width="7" height="7" />
-                    
-                    <rect x="0" y="75" width="25" height="25" />
-                    <rect x="5" y="80" width="15" height="15" fill="white" />
-                    <rect x="8" y="84" width="8" height="8" />
-                    
-                    <rect x="35" y="10" width="10" height="15" />
-                    <rect x="55" y="5" width="15" height="10" />
-                    <rect x="35" y="35" width="30" height="10" />
-                    <rect x="10" y="45" width="15" height="20" />
-                    <rect x="40" y="60" width="15" height="15" />
-                    <rect x="80" y="40" width="15" height="25" />
-                    <rect x="65" y="75" width="10" height="15" />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="bg-white p-1 rounded">
-                      <div className="bg-yellow w-5 h-5 flex items-center justify-center text-ink text-[10px] font-bold">
-                        <PawPrint className="w-3.5 h-3.5 fill-current"/>
-                      </div>
-                    </div>
+              <div className="flex flex-wrap gap-3 mb-6">
+                {donationTiers.map((tier) => (
+                  <button
+                    key={tier.amount}
+                    onClick={() => setSelectedAmount(tier.amount)}
+                    className={`px-6 py-2.5 rounded-full font-display text-lg transition-all border ${
+                      selectedAmount === tier.amount 
+                        ? 'bg-ink text-yellow border-ink shadow-sm' 
+                        : 'bg-bg text-ink border-line hover:border-ink'
+                    }`}
+                  >
+                    ₹{tier.amount.toLocaleString()}
+                  </button>
+                ))}
+              </div>
+
+              {selectedAmount && (
+                <div className="bg-bg border border-line rounded-[14px] p-5 flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-yellow text-ink flex items-center justify-center font-bold shrink-0">
+                    <Heart className="w-6 h-6 fill-current" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-ink text-[16px]">₹{selectedAmount.toLocaleString()} — {donationTiers.find(t => t.amount === selectedAmount)?.label}</span>
+                    <p className="text-muted text-[13px] mt-1">{donationTiers.find(t => t.amount === selectedAmount)?.desc}</p>
                   </div>
                 </div>
-                <p className="font-serif italic text-muted text-xs mt-2.5">Scan to donate</p>
-              </div>
+              )}
+
+              <button 
+                onClick={onDonateClick}
+                className="btn-primary w-full flex items-center justify-center gap-2 py-4 text-lg shadow-sm"
+              >
+                Donate Now <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
 
