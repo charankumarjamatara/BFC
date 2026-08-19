@@ -11,26 +11,26 @@ export default function CoreActivities() {
         description="Rescuing street animals, facilitating adoptions, and building a cruelty-free community across Bengaluru."
       />
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="brand-card p-8 flex flex-col items-center justify-center text-center gap-4 border border-line bg-surface rounded-[16px]">
-          <div className="w-14 h-14 rounded-full bg-bg flex items-center justify-center text-ink border border-line-soft">
-            <Shield className="w-6 h-6" strokeWidth={1.5} />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="brand-card p-6 md:p-8 flex flex-col items-center justify-center text-center gap-3 md:gap-4 border border-line bg-surface rounded-[16px]">
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-bg flex items-center justify-center text-ink border border-line-soft">
+            <Shield className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
           </div>
-          <h4 className="font-display text-[22px] text-ink uppercase tracking-[.02em]">Animal Rescue</h4>
+          <h4 className="font-display text-[16px] sm:text-[18px] md:text-[22px] text-ink uppercase tracking-[.02em]">Animal Rescue</h4>
         </div>
         
-        <div className="brand-card p-8 flex flex-col items-center justify-center text-center gap-4 border border-line bg-surface rounded-[16px]">
-          <div className="w-14 h-14 rounded-full bg-bg flex items-center justify-center text-ink border border-line-soft">
-            <Home className="w-6 h-6" strokeWidth={1.5} />
+        <div className="brand-card p-6 md:p-8 flex flex-col items-center justify-center text-center gap-3 md:gap-4 border border-line bg-surface rounded-[16px]">
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-bg flex items-center justify-center text-ink border border-line-soft">
+            <Home className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
           </div>
-          <h4 className="font-display text-[22px] text-ink uppercase tracking-[.02em]">Adoption</h4>
+          <h4 className="font-display text-[16px] sm:text-[18px] md:text-[22px] text-ink uppercase tracking-[.02em]">Adoption</h4>
         </div>
         
-        <div className="brand-card p-8 flex flex-col items-center justify-center text-center gap-4 border border-line bg-surface rounded-[16px]">
-          <div className="w-14 h-14 rounded-full bg-bg flex items-center justify-center text-ink border border-line-soft">
-            <BookOpen className="w-6 h-6" strokeWidth={1.5} />
+        <div className="col-span-2 md:col-span-1 brand-card p-6 md:p-8 flex flex-col items-center justify-center text-center gap-3 md:gap-4 border border-line bg-surface rounded-[16px]">
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-bg flex items-center justify-center text-ink border border-line-soft">
+            <BookOpen className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
           </div>
-          <h4 className="font-display text-[22px] text-ink uppercase tracking-[.02em]">Education &<br/>Awareness</h4>
+          <h4 className="font-display text-[16px] sm:text-[18px] md:text-[22px] text-ink uppercase tracking-[.02em]">Education &<br/>Awareness</h4>
         </div>
       </div>
     </div>

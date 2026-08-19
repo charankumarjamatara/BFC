@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Phone, ArrowLeft, ArrowRight, Heart } from 'lucide-react';
 
 // Impact Images
-import impactImg1 from '../assets/Donate section/IMG-20241118-WA0000.jpg';
-import impactImg2 from '../assets/Donate section/IMG-20241118-WA0043.jpg';
-import impactImg3 from '../assets/Donate section/Screenshot_20241118-082245_Gallery.jpg';
+import impactImg1 from '../assets/Donate section/Weekly Feeding Drives.webp';
+import impactImg2 from '../assets/Donate section/Emergency Surgeries.webp';
+import impactImg3 from '../assets/Donate section/Vaccination Camp.webp';
 
 // Carousel Images
-import carouselImg1 from '../assets/Donate section/donate_carousel/WhatsApp Image 2026-08-15 at 12.38.26 PM.jpeg';
-import carouselImg2 from '../assets/Donate section/donate_carousel/WhatsApp Image 2026-08-15 at 12.42.10 PM.jpeg';
-import carouselImg3 from '../assets/Donate section/donate_carousel/WhatsApp Image 2026-08-15 at 12.42.12 PM.jpeg';
-import carouselImg4 from '../assets/Donate section/donate_carousel/WhatsApp Image 2026-08-15 at 12.42.17 PM.jpeg';
-import carouselImg5 from '../assets/Donate section/donate_carousel/WhatsApp Image 2026-08-15 at 12.42.18 PM.jpeg';
+import carouselImg1 from '../assets/Donate section/donate_carousel/IMG_1.webp';
+import carouselImg2 from '../assets/Donate section/donate_carousel/IMG_2.webp';
+import carouselImg3 from '../assets/Donate section/donate_carousel/IMG_3.webp';
+import carouselImg4 from '../assets/Donate section/donate_carousel/IMG_4.webp';
+import carouselImg5 from '../assets/Donate section/donate_carousel/IMG_5.webp';
+import carouselImg6 from '../assets/Donate section/donate_carousel/IMG_6.webp';
 
 export default function DonatePage({ onBack }: { onBack?: () => void }) {
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -21,19 +23,37 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
     carouselImg2,
     carouselImg3,
     carouselImg4,
-    carouselImg5
+    carouselImg5,
+    carouselImg6
   ];
 
-  const handleNext = () => setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
-  const handlePrev = () => setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Optional auto-play
+  // Auto-play with pause on hover and reset on interaction
   useEffect(() => {
+    if (isHovered) return;
+    
     const timer = setInterval(() => {
-      handleNext();
-    }, 5000);
+      setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+    }, 3500);
+    
     return () => clearInterval(timer);
-  }, []);
+  }, [isHovered, galleryIndex, galleryImages.length]);
+
+  const getCarouselStyle = (index: number) => {
+    const diff = (index - galleryIndex + galleryImages.length) % galleryImages.length;
+    const distance = diff > galleryImages.length / 2 ? diff - galleryImages.length : diff;
+    const absDistance = Math.abs(distance);
+    const isVisible = absDistance <= 2;
+    return {
+      x: `${distance * 60}%`,
+      z: -absDistance * 100,
+      rotateY: -distance * 20,
+      scale: 1 - absDistance * 0.1,
+      zIndex: 10 - absDistance,
+      opacity: isVisible ? 1 - absDistance * 0.3 : 0,
+    };
+  };
 
   return (
     <div className="w-full flex flex-col animate-fade-in bg-bg pt-20 md:pt-24">
@@ -68,7 +88,6 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
                 />
               </div>
               <div className="p-6 bg-surface flex-1 flex flex-col">
-                <span className="text-[10px] font-bold text-muted uppercase tracking-[.16em] mb-2">Feeding</span>
                 <h3 className="font-display text-[20px] text-ink mb-2 uppercase tracking-[.02em]">Weekly Feeding Drives</h3>
                 <p className="text-muted text-[14px] leading-relaxed">
                   Thanks to your contributions, we successfully distributed over 500 meals to stray dogs across the city this past month.
@@ -86,7 +105,6 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
                 />
               </div>
               <div className="p-6 bg-surface flex-1 flex flex-col">
-                <span className="text-[10px] font-bold text-coral uppercase tracking-[.16em] mb-2">Medical</span>
                 <h3 className="font-display text-[20px] text-ink mb-2 uppercase tracking-[.02em]">Emergency Surgeries</h3>
                 <p className="text-muted text-[14px] leading-relaxed">
                   Funds raised last week helped perform life-saving orthopedic surgeries for three injured indie dogs rescued from hit-and-run accidents.
@@ -104,7 +122,6 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
                 />
               </div>
               <div className="p-6 bg-surface flex-1 flex flex-col">
-                <span className="text-[10px] font-bold text-teal-dk uppercase tracking-[.16em] mb-2">Prevention</span>
                 <h3 className="font-display text-[20px] text-ink mb-2 uppercase tracking-[.02em]">Vaccination Camp</h3>
                 <p className="text-muted text-[14px] leading-relaxed">
                   Your donations sponsored our annual anti-rabies vaccination camp, securing the health of 200+ neighborhood dogs.
@@ -130,66 +147,70 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
             </div>
           </div>
 
-          <div className="flex flex-col items-center">
-            {/* Carousel Container */}
-            <div className="relative w-full max-w-[1000px] flex items-center justify-between gap-2 md:gap-8">
+          <div 
+            className="flex flex-col items-center w-full"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {/* Carousel Container Wrapper */}
+            <div className="relative w-full">
               
-              {/* Left Arrow */}
+              {/* Arrows */}
               <button 
-                onClick={handlePrev}
-                className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center border border-line hover:border-ink transition-colors cursor-pointer text-ink hover:bg-yellow shadow-sm shrink-0 z-30"
+                onClick={() => setGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
+                className="absolute left-2 sm:left-6 md:left-12 xl:left-24 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_2px_15px_rgba(0,0,0,0.08)] border border-line-soft hover:scale-110 transition-transform text-ink hidden sm:flex"
+                aria-label="Previous slide"
               >
                 <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
               </button>
 
-              {/* 3D Track */}
-              <div className="relative flex-1 h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden" style={{ perspective: '1200px' }}>
-                {galleryImages.map((src, i) => {
-                  const offset = (i - galleryIndex + galleryImages.length) % galleryImages.length;
-                  let position = offset;
-                  if (offset > galleryImages.length / 2) {
-                    position = offset - galleryImages.length;
-                  }
-
-                  const isVisible = Math.abs(position) <= 1;
-                  const isCenter = position === 0;
-
-                  return (
-                    <div
-                      key={src}
-                      className="brand-card absolute transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                      style={{
-                        width: 'clamp(220px, 40vw, 400px)',
-                        height: 'clamp(240px, 45vw, 360px)',
-                        transform: `translateX(${position * 65}%) scale(${isCenter ? 1 : 0.85}) rotateY(${position * -15}deg)`,
-                        zIndex: isCenter ? 20 : 10,
-                        opacity: isVisible ? 1 : 0,
-                        pointerEvents: isCenter ? 'auto' : 'none',
-                        boxShadow: isCenter ? '0 15px 35px -10px rgba(0,0,0,0.15)' : 'none'
-                      }}
-                    >
-                      <img 
-                        src={src} 
-                        alt="Gallery item" 
-                        className="w-full h-full object-cover" 
-                      />
-                      {!isCenter && <div className="absolute inset-0 bg-surface/30 transition-opacity duration-500"></div>}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Right Arrow */}
               <button 
-                onClick={handleNext}
-                className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center border border-line hover:border-ink transition-colors cursor-pointer text-ink hover:bg-yellow shadow-sm shrink-0 z-30"
+                onClick={() => setGalleryIndex((prev) => (prev + 1) % galleryImages.length)}
+                className="absolute right-2 sm:right-6 md:right-12 xl:right-24 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_2px_15px_rgba(0,0,0,0.08)] border border-line-soft hover:scale-110 transition-transform text-ink hidden sm:flex"
+                aria-label="Next slide"
               >
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </button>
+
+              {/* 3D Carousel Container */}
+              <div 
+                className="relative h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center w-full max-w-5xl mx-auto"
+                style={{ perspective: '1200px' }}
+              >
+                {galleryImages.map((src, index) => {
+                const style = getCarouselStyle(index);
+                const isClickable = Math.abs(style.zIndex - 10) <= 1; 
+
+                return (
+                  <motion.div
+                    key={index}
+                    className="absolute w-[240px] sm:w-[320px] md:w-[450px] cursor-pointer"
+                    animate={{
+                      x: style.x,
+                      z: style.z,
+                      rotateY: style.rotateY,
+                      scale: style.scale,
+                      zIndex: style.zIndex,
+                      opacity: style.opacity
+                    }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      pointerEvents: isClickable ? 'auto' : 'none'
+                    }}
+                    onClick={() => setGalleryIndex(index)}
+                  >
+                    <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-line-soft bg-bg">
+                      <img src={src} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-3 mt-10">
               {galleryImages.map((_, i) => (
                 <button
                   key={i}
@@ -225,23 +246,23 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
             </div>
             
             <div className="w-full md:w-[55%] flex flex-col gap-4">
-              <a href="mailto:rescue@bfc.org" className="brand-card p-5 md:p-6 flex items-center gap-5 hover:border-ink transition-colors w-full bg-surface shadow-sm">
+              <a href="mailto:brutalityfreecommunity@gmail.com" className="brand-card p-5 md:p-6 flex items-center gap-5 hover:border-ink transition-colors w-full bg-surface shadow-sm">
                 <div className="w-12 h-12 rounded-full bg-yellow border border-line-soft flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-ink" />
                 </div>
                 <div className="text-left">
                   <div className="text-[11px] font-bold text-muted uppercase tracking-[.16em] mb-1">Email Us</div>
-                  <div className="font-bold text-[16px] md:text-[18px] text-ink">rescue@bfc.org</div>
+                  <div className="font-bold text-[16px] md:text-[18px] text-ink truncate w-full">brutalityfreecommunity@gmail.com</div>
                 </div>
               </a>
               
-              <a href="tel:+911234567890" className="brand-card p-5 md:p-6 flex items-center gap-5 hover:border-ink transition-colors w-full bg-surface shadow-sm">
+              <a href="tel:+919008912829" className="brand-card p-5 md:p-6 flex items-center gap-5 hover:border-ink transition-colors w-full bg-surface shadow-sm">
                 <div className="w-12 h-12 rounded-full bg-yellow border border-line-soft flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-ink" />
                 </div>
                 <div className="text-left">
                   <div className="text-[11px] font-bold text-muted uppercase tracking-[.16em] mb-1">Call Helpline</div>
-                  <div className="font-bold text-[16px] md:text-[18px] text-ink">+91 12345 67890</div>
+                  <div className="font-bold text-[16px] md:text-[18px] text-ink">+91 90089 12829</div>
                 </div>
               </a>
             </div>

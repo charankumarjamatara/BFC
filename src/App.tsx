@@ -10,6 +10,7 @@ import Blogs from './components/Blogs';
 import BlogsPage from './components/BlogsPage';
 import Donate from './components/Donate';
 import DonatePage from './components/DonatePage';
+import Adoption from './components/Adoption';
 import Volunteer from './components/Volunteer';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -25,17 +26,8 @@ export default function App() {
     return (
       <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth flex flex-col">
         <Navbar onNavigate={setActivePage} />
-        <div className="flex-grow pt-32 pb-16 px-6 container mx-auto max-w-[1180px]">
-          {/* Back button */}
-          <button 
-            onClick={() => setActivePage('home')}
-            className="mb-8 flex items-center gap-2 text-muted hover:text-ink transition-colors font-bold text-xs uppercase tracking-widest cursor-pointer"
-          >
-            ← Back to Home
-          </button>
-          
-          {/* Team component that occupies full space */}
-          <MeetTeam fullPage={true} /> 
+        <div className="flex-grow">
+          <MeetTeam onBack={() => setActivePage('home')} /> 
         </div>
         <Footer />
       </div>
@@ -80,7 +72,7 @@ export default function App() {
 
   return (
     <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth">
-      <Navbar onNavigate={setActivePage} />
+      <Navbar onNavigate={setActivePage} transparentOnTop={true} />
       <Hero onDonateClick={() => setActivePage('donate')} />
       
       {/* About Us Section */}
@@ -102,6 +94,7 @@ export default function App() {
       <Activities onKnowMore={() => setActivePage('activities')} />
       <Blogs onKnowMore={() => setActivePage('blogs')} />
       <Donate onDonateClick={() => setActivePage('donate')} />
+      <Adoption />
       <Volunteer />
       <Contact />
       <Footer />

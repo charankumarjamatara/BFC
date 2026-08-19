@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Heart, ArrowRight, AlertTriangle, ShieldCheck, PawPrint, Sparkles } from 'lucide-react';
 import impactDogBg from '../assets/impact_dog_bg.png';
-
 interface DonateProps {
   onDonateClick?: () => void;
 }
@@ -150,6 +149,8 @@ export default function Donate({ onDonateClick }: DonateProps) {
 
         </div>
       </div>
+
+
 
       </div>
     </section>

@@ -1,5 +1,8 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
+import blog1Img from '../assets/blogs/The Art Of Noticing.webp';
+import blog2Img from '../assets/blogs/This is a Positive Investment.webp';
+import blog3Img from '../assets/blogs/Indie Pup Looking for Home.webp';
 
 export default function BlogsPage({ onBack }: { onBack?: () => void }) {
   
@@ -8,19 +11,19 @@ export default function BlogsPage({ onBack }: { onBack?: () => void }) {
       id: 1,
       title: 'The Art Of Noticing',
       description: "Noticing the wag of a tail, the eyes that speak without words, the life that's lived in silence and survival.",
-      image: 'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=800&q=80',
+      image: blog1Img,
     },
     {
       id: 2,
       title: 'This is a Positive Investment',
       description: 'Because every meal, every medicine, every rescued life is a step towards a better world.',
-      image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80',
+      image: blog2Img,
     },
     {
       id: 3,
       title: 'Indie Pup Looking for Home',
       description: "These adorable indie pups are looking for their forever homes. Let's give them the love they deserve.",
-      image: 'https://images.unsplash.com/photo-1444212477490-ca407925329e?auto=format&fit=crop&w=800&q=80',
+      image: blog3Img,
     }
   ];
 

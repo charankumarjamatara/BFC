@@ -9,7 +9,7 @@ interface HeroProps {
 
 export default function Hero({ onDonateClick }: HeroProps) {
   return (
-    <div className="relative min-h-[80vh] md:min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden dark bg-black">
+    <div className="relative min-h-[100svh] md:min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden dark bg-black">
       
       {/* Video Background */}
       <video 
@@ -18,18 +18,15 @@ export default function Hero({ onDonateClick }: HeroProps) {
         muted 
         playsInline 
         className="absolute inset-0 w-full h-full object-cover object-center z-0"
-        poster="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1920&q=80"
       >
         <source src={heroBgVideo} type="video/mp4" />
       </video>
 
       {/* Directional Gradient Overlay (Dark Left -> Transparent Right) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-black/10 md:from-black/95 md:via-black/60 md:to-transparent z-10 pointer-events-none"></div>
-
-
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 md:from-black/95 md:via-black/60 md:to-transparent z-10 pointer-events-none"></div>
 
       {/* Content Container aligned to master grid */}
-      <section className="section-container relative z-20 pt-32 pb-16 md:pt-40 md:pb-24 w-full text-left">
+      <section className="section-container relative z-20 pt-40 pb-12 md:pt-40 md:pb-24 w-full text-left">
         
         {/* Confine content to the left reading zone (approx 40% on desktop) */}
         <div className="w-full md:w-[50%] lg:w-[42%]">
@@ -46,7 +43,7 @@ export default function Hero({ onDonateClick }: HeroProps) {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 mt-10"
+            className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 mt-8 md:mt-10"
           >
             <button onClick={onDonateClick} className="btn-primary w-full sm:w-auto">
               Donate Now

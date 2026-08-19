@@ -22,11 +22,11 @@ export default function EmergencyBar() {
         <span className="w-2 h-2 rounded-full bg-[#3a0f06] animate-ping"></span>
         <PhoneCall className="w-3.5 h-3.5" />
         <span className="hidden sm:inline">Helpline:</span>
-        <a href="tel:+919845012345" className="hover:underline">+91 98450 12345</a>
+        <a href="tel:+919008912829" className="hover:underline">+91 90089 12829</a>
       </div>
 
       <a 
-        href="https://wa.me/919845012345" 
+        href="https://wa.me/919008912829" 
         target="_blank" 
         rel="noreferrer"
         className="hidden md:flex items-center gap-1.5 bg-teal text-[#04332d] px-3 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-[#15a393] transition-colors"

@@ -1,5 +1,8 @@
 import React from 'react';
 import SectionHeader from './SectionHeader';
+import blog1Img from '../assets/blogs/The Art Of Noticing.webp';
+import blog2Img from '../assets/blogs/This is a Positive Investment.webp';
+import blog3Img from '../assets/blogs/Indie Pup Looking for Home.webp';
 
 interface BlogsProps {
   onKnowMore?: () => void;
@@ -20,7 +23,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
           <article className="brand-card flex flex-col">
             <div className="relative h-44 border-b border-line shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=400&q=80" 
+                src={blog1Img} 
                 alt="The Art Of Noticing" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -38,7 +41,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
           <article className="brand-card flex flex-col">
             <div className="relative h-44 border-b border-line shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=400&q=80" 
+                src={blog2Img} 
                 alt="Positive Investment" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -56,7 +59,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
           <article className="brand-card flex flex-col">
             <div className="relative h-44 border-b border-line shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1444212477490-ca407925329e?auto=format&fit=crop&w=400&q=80" 
+                src={blog3Img} 
                 alt="Looking for Home" 
                 className="absolute inset-0 w-full h-full object-cover"
               />

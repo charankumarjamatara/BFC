@@ -1,6 +1,9 @@
 import React from 'react';
 import { Shield, Heart, Sparkles } from 'lucide-react';
 import SectionHeader from './SectionHeader';
+import rescueImg from '../assets/Activities/Animal Rescue.webp';
+import feedingImg from '../assets/Activities/Feeding Program.webp';
+import collarImg from '../assets/Activities/Collar Drives.webp';
 
 interface ActivitiesProps {
   onKnowMore?: () => void;
@@ -22,13 +25,11 @@ export default function Activities({ onKnowMore }: ActivitiesProps) {
           <div className="brand-card flex flex-col md:row-span-2">
             <div className="relative flex-1 min-h-[240px] md:min-h-[300px] w-full border-b border-line">
               <img 
-                src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" 
+                src={rescueImg} 
                 alt="Animal Rescue"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute bottom-5 left-5 bg-ink text-yellow p-3 rounded-xl border border-line-soft shadow-lg">
-                <Shield className="w-5 h-5" />
-              </div>
+
             </div>
             <div className="p-6 lg:p-8 shrink-0">
               <h3 className="font-display text-[26px] text-ink mb-3 uppercase tracking-[.02em]">Animal Rescue</h3>
@@ -42,13 +43,11 @@ export default function Activities({ onKnowMore }: ActivitiesProps) {
           <div className="brand-card flex flex-col">
             <div className="relative h-40 sm:h-48 w-full border-b border-line shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=600&q=80" 
+                src={feedingImg} 
                 alt="Feeding Program"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute bottom-4 left-4 bg-ink text-yellow p-2.5 rounded-xl border border-line-soft shadow-lg">
-                <Heart className="w-4 h-4" />
-              </div>
+
             </div>
             <div className="p-5 lg:p-6 flex-1">
               <h3 className="font-display text-[20px] text-ink mb-2 uppercase tracking-[.02em]">Feeding Program</h3>
@@ -62,13 +61,11 @@ export default function Activities({ onKnowMore }: ActivitiesProps) {
           <div className="brand-card flex flex-col">
             <div className="relative h-40 sm:h-48 w-full border-b border-line shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=600&q=80" 
+                src={collarImg} 
                 alt="Collar Drives"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute bottom-4 left-4 bg-ink text-yellow p-2.5 rounded-xl border border-line-soft shadow-lg">
-                <Sparkles className="w-4 h-4" />
-              </div>
+
             </div>
             <div className="p-5 lg:p-6 flex-1">
               <h3 className="font-display text-[20px] text-ink mb-2 uppercase tracking-[.02em]">Collar Drives</h3>

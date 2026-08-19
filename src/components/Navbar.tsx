@@ -1,44 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import logoImg from '../assets/BFC logo.png';
 
 interface NavbarProps {
   onNavigate?: (page: string) => void;
+  transparentOnTop?: boolean;
 }
 
-export default function Navbar({ onNavigate }: NavbarProps) {
+export default function Navbar({ onNavigate, transparentOnTop = false }: NavbarProps) {
   const [navScrolled, setNavScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
+      if (window.scrollY > 50) {
         setNavScrolled(true);
       } else {
         setNavScrolled(false);
       }
     };
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isTransparent = transparentOnTop && !navScrolled;
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex items-center justify-between py-4 border-b border-line-soft ${
-      navScrolled 
-        ? 'bg-bg/90 backdrop-blur-md' 
-        : 'bg-bg'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex items-center justify-between py-4 ${
+      isTransparent 
+        ? 'bg-transparent border-b border-transparent' 
+        : 'bg-bg/90 backdrop-blur-md border-b border-line-soft'
     }`}>
       <div className="section-container flex items-center justify-between w-full">
         {/* Brandmark */}
-        <a href="#" className="flex items-center gap-3 shrink-0">
-          <span className="w-[26px] h-[26px] border-[3px] border-yellow border-r-transparent rounded-full -rotate-45" aria-hidden="true"></span>
-          <b className="font-display text-[21px] tracking-[.04em] text-ink uppercase">BFC</b>
+        <a href="#" className="flex items-center shrink-0">
+          <img src={logoImg} alt="BFC Logo" className="h-[50px] md:h-[60px] w-auto" />
         </a>
         
         {/* Nav Links */}
-        <div className="hidden lg:flex items-center justify-center gap-8 text-[13px] font-semibold text-muted tracking-wide uppercase flex-1">
-          <a href="#about" className="hover:text-ink transition-colors duration-200">About Us</a>
-          <a href="#activities" className="hover:text-ink transition-colors duration-200">Activities</a>
-          <a href="#blogs" className="hover:text-ink transition-colors duration-200">Blogs</a>
-          <a href="#donate" className="hover:text-ink transition-colors duration-200">Donate</a>
-          <a href="#volunteer" className="hover:text-ink transition-colors duration-200">Volunteer</a>
-          <a href="#contact" className="hover:text-ink transition-colors duration-200">Contact</a>
+        <div className={`hidden lg:flex items-center justify-center gap-8 text-[13px] font-semibold tracking-wide uppercase flex-1 transition-colors duration-300 ${isTransparent ? 'text-white/80' : 'text-muted'}`}>
+          <a href="#about" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>About Us</a>
+          <a href="#activities" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>Activities</a>
+          <a href="#blogs" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>Blogs</a>
+          <a href="#donate" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>Donate</a>
+          <a href="#adoption" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>Adoption</a>
+          <a href="#volunteer" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>Volunteer</a>
+          <a href="#contact" className={`transition-colors duration-200 ${isTransparent ? 'hover:text-white' : 'hover:text-ink'}`}>Contact</a>
         </div>
 
         {/* CTA */}

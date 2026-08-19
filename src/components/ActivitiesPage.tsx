@@ -1,9 +1,9 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import impactImg from '../assets/impact_dog_bg.png';
-import feedingImg from '../assets/brown_dog_feeding.png';
-import volunteerImg from '../assets/volunteer.jpg';
+import impactImg from '../assets/Activities/Animal Rescue.webp';
+import feedingImg from '../assets/Activities/Feeding Program.webp';
+import volunteerImg from '../assets/Activities/Collar Drives.webp';
 
 export default function ActivitiesPage({ onBack }: { onBack?: () => void }) {
   return (
