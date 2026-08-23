@@ -137,7 +137,7 @@ export default function Adoption() {
       </div>
 
       <div className="mt-12 flex justify-center text-center">
-          <p className="text-lg font-semibold text-ink">For adoption kindly contact us at <a href="tel:+919972812063" className="hover:underline text-yellow">+91 99728 12063</a></p>
+          <p className="text-lg font-semibold text-ink">For adoption kindly contact us at <a href="https://wa.me/919972812063" target="_blank" rel="noopener noreferrer" className="hover:underline text-yellow">+91 99728 12063</a></p>
         </div>
       </div>
     </section>

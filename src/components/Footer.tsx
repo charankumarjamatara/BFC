@@ -4,13 +4,17 @@ import logoImg from '../assets/BFC logo.png';
 export default function Footer() {
   return (
     <footer className="bg-ink text-white pt-20 pb-8 relative overflow-hidden border-t border-[#333]">
-      <div className="section-container">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-12 border-b border-[#333] pb-16">
+      <div className="section-container px-6 md:px-12 lg:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 border-b border-[#333] pb-12 md:pb-16">
           
           {/* Branding Column */}
-          <div className="col-span-2 md:col-span-4 space-y-6">
-            <a href="#" className="flex items-center">
+          <div className="col-span-1 md:col-span-4 space-y-6">
+            <a href="#" className="flex items-center gap-3 md:gap-[10px]">
               <img src={logoImg} alt="BFC Logo" className="h-[80px] md:h-[100px] w-auto" />
+              <div className="flex flex-col justify-center font-display text-[18px] md:text-[22px] uppercase tracking-[.02em] text-white leading-[1.1]">
+                <span>Brutality Free</span>
+                <span>Community</span>
+              </div>
             </a>
             <div className="flex gap-4 pt-2">
               <a href="#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-[#333] flex items-center justify-center text-[#8e8e93] hover:text-ink hover:bg-yellow hover:border-yellow transition-colors">
@@ -48,18 +52,27 @@ export default function Footer() {
           </div>
 
           {/* Contact Details in Footer */}
-          <div className="col-span-2 md:col-span-4 space-y-5">
+          <div className="col-span-1 md:col-span-4 space-y-5">
             <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Helpline Support</h4>
-            <p className="text-[14.5px] text-[#8e8e93] leading-relaxed">
-              Emergency Hotline: +91 90089 12829<br/>
-              Office Address: Indiranagar, Bangalore, KA, India<br/>
-              Email: brutalityfreecommunity@gmail.com
-            </p>
+            <div className="flex flex-col gap-4 text-[14.5px] text-[#8e8e93]">
+              <a href="tel:+919008912829" className="flex items-start hover:text-white transition-colors">
+                <span className="w-7 flex-shrink-0 text-[18px] leading-none mt-1">📞</span>
+                <span className="flex-1 leading-snug">+91 90089 12829</span>
+              </a>
+              <a href="https://maps.google.com/?q=Indiranagar,+Bangalore,+KA,+India" target="_blank" rel="noreferrer" className="flex items-start hover:text-white transition-colors">
+                <span className="w-7 flex-shrink-0 text-[18px] leading-none mt-1">📍</span>
+                <span className="flex-1 leading-snug">Indiranagar, Bangalore, KA, India</span>
+              </a>
+              <a href="mailto:brutalityfreecommunity@gmail.com" className="flex items-start hover:text-white transition-colors">
+                <span className="w-7 flex-shrink-0 text-[18px] leading-none mt-1">✉️</span>
+                <span className="flex-1 leading-snug break-words">brutalityfreecommunity@gmail.com</span>
+              </a>
+            </div>
           </div>
 
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 text-[12px] text-[#8e8e93] space-y-4 md:space-y-0">
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 text-[12px] text-[#8e8e93] space-y-4 md:space-y-0 text-center md:text-left">
           <p>© {new Date().getFullYear()} Brutality Free Community NGO. All Rights Reserved.</p>
           <p>Designed with compassion for street animals • Registered Trust 12A/80G</p>
         </div>

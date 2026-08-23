@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import SectionHeader from './SectionHeader';
 import blog1Img from '../assets/blogs/The Art Of Noticing.webp';
 import blog2Img from '../assets/blogs/This is a Positive Investment.webp';
@@ -9,6 +9,25 @@ interface BlogsProps {
 }
 
 export default function Blogs({ onKnowMore }: BlogsProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        if (scrollWidth > clientWidth) {
+          let nextScroll = scrollLeft + clientWidth;
+          if (nextScroll >= scrollWidth - 10) {
+            nextScroll = 0;
+          }
+          scrollRef.current.scrollTo({ left: nextScroll, behavior: 'smooth' });
+        }
+      }
+    }, 3500);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="blogs" className="section-wrapper bg-bg">
       <div className="section-container">
@@ -18,17 +37,21 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
           headingParts={["Latest", "Stories"]}
         />
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div 
+          ref={scrollRef}
+          className="flex md:grid flex-nowrap md:grid-cols-3 gap-5 overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0 hide-scrollbar"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           
-          <article className="brand-card flex flex-col">
-            <div className="relative h-44 border-b border-line shrink-0">
+          <article className="brand-card flex flex-col min-w-full md:min-w-0 snap-start h-full">
+            <div className="relative flex-1 min-h-[240px] md:min-h-[260px] w-full border-b border-line-soft">
               <img 
                 src={blog1Img} 
                 alt="The Art Of Noticing" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
-            <div className="p-6 lg:p-8 flex-1">
+            <div className="p-6 lg:p-8 shrink-0">
               <h3 className="font-display text-[22px] text-ink mb-2 leading-[1.1] uppercase tracking-[.02em]">
                 The Art Of Noticing
               </h3>
@@ -38,15 +61,15 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
             </div>
           </article>
 
-          <article className="brand-card flex flex-col">
-            <div className="relative h-44 border-b border-line shrink-0">
+          <article className="brand-card flex flex-col min-w-full md:min-w-0 snap-start h-full">
+            <div className="relative flex-1 min-h-[240px] md:min-h-[260px] w-full border-b border-line-soft">
               <img 
                 src={blog2Img} 
                 alt="Positive Investment" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
-            <div className="p-6 lg:p-8 flex-1">
+            <div className="p-6 lg:p-8 shrink-0">
               <h3 className="font-display text-[22px] text-ink mb-2 leading-[1.1] uppercase tracking-[.02em]">
                 This is a Positive Investment
               </h3>
@@ -56,15 +79,15 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
             </div>
           </article>
 
-          <article className="brand-card flex flex-col">
-            <div className="relative h-44 border-b border-line shrink-0">
+          <article className="brand-card flex flex-col min-w-full md:min-w-0 snap-start h-full">
+            <div className="relative flex-1 min-h-[240px] md:min-h-[260px] w-full border-b border-line-soft">
               <img 
                 src={blog3Img} 
                 alt="Looking for Home" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
-            <div className="p-6 lg:p-8 flex-1">
+            <div className="p-6 lg:p-8 shrink-0">
               <h3 className="font-display text-[22px] text-ink mb-2 leading-[1.1] uppercase tracking-[.02em]">
                 Indie Pup Looking for Home
               </h3>
@@ -76,7 +99,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
 
         </div>
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-6 md:mt-10 flex justify-center">
           <button onClick={onKnowMore} className="btn-outline">
             Know More
           </button>

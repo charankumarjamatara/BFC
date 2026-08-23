@@ -29,7 +29,7 @@ export default function MeetTeam({ fullPage = false, onBack }: MeetTeamProps) {
   };
 
   const peopleLead = {
-    name: "Manaswini Irgavarapu",
+    name: "Manaswini Iragavarapu",
     role: "People Management Lead",
     bio: "Leading our rapid response and volunteer coordination, Manaswini ensures that our network of animal lovers operates seamlessly to save lives every single day.",
     image: peopleLeadImg
@@ -181,35 +181,35 @@ export default function MeetTeam({ fullPage = false, onBack }: MeetTeamProps) {
             </div>
 
             {/* PEOPLE MANAGEMENT LEAD & OPERATIONS HEAD (2x1 CENTERED) */}
-            <div className="flex flex-col md:flex-row justify-center gap-12 md:gap-20 py-8 md:py-10 border-t border-b border-line-soft">
+            <div className="flex flex-row justify-center gap-4 md:gap-20 py-8 md:py-10 border-t border-b border-line-soft">
               
               {/* PEOPLE MANAGEMENT LEAD */}
-              <div className="flex flex-col gap-5 w-full max-w-[280px]">
-                <div className="w-full aspect-[4/5] rounded-[16px] overflow-hidden border border-line-soft bg-surface">
+              <div className="flex flex-col gap-3 md:gap-5 flex-1 max-w-[280px]">
+                <div className="w-full aspect-[4/5] rounded-[12px] md:rounded-[16px] overflow-hidden border border-line-soft bg-surface">
                   <img src={peopleLead.image} alt={peopleLead.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="text-left flex flex-col">
-                  <span className="text-yellow text-[9px] font-bold tracking-widest uppercase block mb-2">{peopleLead.role}</span>
-                  <h3 className="font-display text-[24px] md:text-[28px] text-ink uppercase leading-none tracking-[.01em] mb-2">
+                  <span className="text-yellow text-[8px] sm:text-[9px] font-bold tracking-widest uppercase block mb-1 md:mb-2">{peopleLead.role}</span>
+                  <h3 className="font-display text-[16px] sm:text-[20px] md:text-[28px] text-ink uppercase leading-[1.1] tracking-[.01em] mb-1.5 md:mb-2">
                     {peopleLead.name}
                   </h3>
-                  <p className="text-muted text-[14px] leading-relaxed">
+                  <p className="text-muted text-[11px] md:text-[14px] leading-relaxed">
                     {peopleLead.bio}
                   </p>
                 </div>
               </div>
 
               {/* OPERATIONS & STRATEGIES HEAD */}
-              <div className="flex flex-col gap-5 w-full max-w-[280px]">
-                <div className="w-full aspect-[4/5] rounded-[16px] overflow-hidden border border-line-soft bg-surface">
+              <div className="flex flex-col gap-3 md:gap-5 flex-1 max-w-[280px]">
+                <div className="w-full aspect-[4/5] rounded-[12px] md:rounded-[16px] overflow-hidden border border-line-soft bg-surface">
                   <img src={opsHead.image} alt={opsHead.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="text-left flex flex-col">
-                  <span className="text-yellow text-[9px] font-bold tracking-widest uppercase block mb-2">{opsHead.role}</span>
-                  <h3 className="font-display text-[24px] md:text-[28px] text-ink uppercase leading-none tracking-[.01em] mb-2">
+                  <span className="text-yellow text-[8px] sm:text-[9px] font-bold tracking-widest uppercase block mb-1 md:mb-2">{opsHead.role}</span>
+                  <h3 className="font-display text-[16px] sm:text-[20px] md:text-[28px] text-ink uppercase leading-[1.1] tracking-[.01em] mb-1.5 md:mb-2">
                     {opsHead.name}
                   </h3>
-                  <p className="text-muted text-[14px] leading-relaxed">
+                  <p className="text-muted text-[11px] md:text-[14px] leading-relaxed">
                     {opsHead.bio}
                   </p>
                 </div>
