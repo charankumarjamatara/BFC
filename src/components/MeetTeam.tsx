@@ -3,8 +3,8 @@ import founderImg from '../assets/About_Us_section/founder.webp';
 import cofounderImg from '../assets/About_Us_section/cofounder.webp';
 import peopleLeadImg from '../assets/About_Us_section/People Management Lead.webp';
 import opsHeadImg from '../assets/About_Us_section/Operations & Strategies Head.webp';
-import missionImg from '../assets/About_Us_section/our mission.webp';
-import visionImg from '../assets/About_Us_section/our vision.webp';
+import missionImg from '../assets/About_Us_section/our mission.jpeg';
+import visionImg from '../assets/About_Us_section/our vision.jpeg';
 
 interface MeetTeamProps {
   fullPage?: boolean;

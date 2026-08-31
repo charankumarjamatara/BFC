@@ -41,8 +41,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="block text-[10px] font-bold text-muted uppercase tracking-[.12em]">Email</span>
-                    <a href="mailto:hello@bfc.community" className="font-semibold text-ink text-[14.5px] hover:text-muted transition-colors">
-                      hello@bfc.community
+                    <a href="mailto:brutalityfreecommunity@gmail.com" className="font-semibold text-ink text-[14.5px] hover:text-muted transition-colors">
+                      brutalityfreecommunity@gmail.com
                     </a>
                   </div>
                 </div>
@@ -54,8 +54,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="block text-[10px] font-bold text-muted uppercase tracking-[.12em]">Call or WhatsApp</span>
-                    <a href="tel:+919000000000" className="font-semibold text-ink text-[14.5px] hover:text-muted transition-colors">
-                      +91 90000 00000
+                    <a href="tel:+919008912829" className="font-semibold text-ink text-[14.5px] hover:text-muted transition-colors">
+                      +91 90089 12829
                     </a>
                   </div>
                 </div>

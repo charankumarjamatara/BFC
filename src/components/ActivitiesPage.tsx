@@ -31,9 +31,7 @@ export default function ActivitiesPage({ onBack }: { onBack?: () => void }) {
               </h1>
             </div>
             <div className="w-full md:w-[55%] lg:w-[50%] pb-1 md:pb-3">
-              <p className="text-muted text-[16px] md:text-[18px] leading-relaxed max-w-md">
-                Small actions. Real impact. Here is how BFC helps animals every day.
-              </p>
+              {/* Removed intro paragraph text */}
             </div>
           </div>
           

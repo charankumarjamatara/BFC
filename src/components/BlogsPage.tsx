@@ -1,5 +1,5 @@
-import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { ArrowLeft, Search } from 'lucide-react';
 import blog1Img from '../assets/blogs/The Art Of Noticing.webp';
 import blog2Img from '../assets/blogs/This is a Positive Investment.webp';
 import blog3Img from '../assets/blogs/Indie Pup Looking for Home.webp';
@@ -7,6 +7,7 @@ import blog4Img from '../assets/blogs/A LITTLE KINDNESS GOES A LONG WAY.jpeg';
 import blog5Img from '../assets/blogs/EVERY LIFE DESERVES A SAFE PLACE.jpeg';
 
 export default function BlogsPage({ onBack }: { onBack?: () => void }) {
+  const [searchQuery, setSearchQuery] = useState('');
   
   const blogs = [
     {
@@ -51,8 +52,19 @@ export default function BlogsPage({ onBack }: { onBack?: () => void }) {
     }
   ];
 
+  const filteredBlogs = useMemo(() => {
+    if (!searchQuery.trim()) return blogs;
+    const lowerQuery = searchQuery.toLowerCase();
+    return blogs.filter(
+      (blog) =>
+        blog.title.toLowerCase().includes(lowerQuery) ||
+        blog.description.toLowerCase().includes(lowerQuery) ||
+        blog.category.toLowerCase().includes(lowerQuery)
+    );
+  }, [searchQuery, blogs]);
+
   return (
-    <div className="w-full flex flex-col animate-fade-in bg-surface pt-20 md:pt-24 pb-16 md:pb-24">
+    <div className="w-full flex flex-col animate-fade-in bg-surface pt-20 md:pt-24 pb-16 md:pb-24 min-h-screen">
       
       <section className="section-wrapper border-t-0 bg-surface !pt-4 md:!pt-8 !pb-0">
         <div className="section-container">
@@ -66,54 +78,74 @@ export default function BlogsPage({ onBack }: { onBack?: () => void }) {
           </button>
           
           {/* HEADER INTRODUCTION */}
-          <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12 mb-10 md:mb-14">
-            <div className="w-full md:w-[45%] lg:w-[40%]">
-              <span className="eyebrow mb-2 block">Read our stories</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-12 mb-10 md:mb-14">
+            <div className="w-full md:w-1/2">
+              <span className="eyebrow mb-2 block text-[#E53E3E]">Read our stories</span>
               <h1 className="font-display text-[clamp(40px,6.5vw,72px)] text-ink uppercase leading-[.92] tracking-[.01em]">
                 Blogs<span className="inline-block w-3 h-3 md:w-4 md:h-4 bg-yellow align-baseline ml-1.5 md:ml-2"></span>
               </h1>
             </div>
-            <div className="w-full md:w-[55%] lg:w-[60%] pb-1 md:pb-3">
-              <p className="text-muted text-[16px] md:text-[18px] leading-relaxed max-w-md">
-                Tales of rescue, recovery, and hope. Discover the lives we've touched and the impact of our community.
-              </p>
+            
+            {/* SEARCH BAR */}
+            <div className="w-full md:w-1/2 md:max-w-md pb-2">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search blogs..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3.5 bg-white border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#E53E3E]/20 focus:border-[#E53E3E] transition-all text-[15px] shadow-sm text-ink placeholder-muted"
+                />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
+              </div>
             </div>
           </div>
           
-          {/* 3-COLUMN EDITORIAL ARTICLE GRID */}
+          {/* 3-COLUMN TILE GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             
-            {blogs.map((blog) => (
-              <article key={blog.id} className="flex flex-col group cursor-pointer bg-surface rounded-[16px]">
-                
-                {/* IMAGE TOP */}
-                <div className="relative w-full h-[220px] sm:h-[260px] md:h-[240px] lg:h-[260px] rounded-[16px] overflow-hidden mb-5">
-                  <img 
-                    src={blog.image} 
-                    alt={blog.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  />
-                </div>
-                
-                {/* CONTENT BOTTOM */}
-                <div className="flex flex-col flex-1 px-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="eyebrow !text-[10px]">{blog.category}</span>
-                    <span className="w-1 h-1 rounded-full bg-line-soft"></span>
-                    <span className="text-muted text-[10px] font-bold uppercase tracking-wider">{blog.date}</span>
+            {filteredBlogs.length > 0 ? (
+              filteredBlogs.map((blog) => (
+                <article key={blog.id} className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 group cursor-pointer">
+                  
+                  {/* IMAGE TOP */}
+                  <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
+                    <img 
+                      src={blog.image} 
+                      alt={blog.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                    />
                   </div>
                   
-                  <h2 className="font-display text-[26px] md:text-[28px] lg:text-[32px] text-ink uppercase leading-[1.05] tracking-[.01em] mb-3">
-                    {blog.title}
-                  </h2>
+                  {/* CONTENT BOTTOM */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-[#E53E3E] text-[13px] font-bold uppercase tracking-wide">{blog.category}</span>
+                      <span className="text-muted text-[13px]">{blog.date}</span>
+                    </div>
+                    
+                    <h2 className="font-display text-[22px] text-ink leading-[1.2] mb-3 line-clamp-2">
+                      {blog.title}
+                    </h2>
+                    
+                    <p className="text-muted text-[15px] leading-relaxed line-clamp-3">
+                      {blog.description}
+                    </p>
+                  </div>
                   
-                  <p className="text-muted text-[14px] md:text-[15px] leading-relaxed">
-                    {blog.description}
-                  </p>
-                </div>
-                
-              </article>
-            ))}
+                </article>
+              ))
+            ) : (
+              <div className="col-span-full py-20 text-center flex flex-col items-center">
+                <p className="text-muted text-[18px] mb-4">No blogs found matching "{searchQuery}"</p>
+                <button 
+                  onClick={() => setSearchQuery('')}
+                  className="px-6 py-2 bg-bg border border-line-soft rounded-full text-ink font-medium text-[14px] hover:bg-surface transition-colors"
+                >
+                  Clear Search
+                </button>
+              </div>
+            )}
 
           </div>
           

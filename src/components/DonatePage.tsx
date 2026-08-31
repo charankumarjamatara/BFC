@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, ArrowLeft, ArrowRight, Heart } from 'lucide-react';
 
@@ -28,6 +28,25 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
   ];
 
   const [isHovered, setIsHovered] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll impact cards on mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        if (scrollWidth > clientWidth) {
+          let nextScroll = scrollLeft + clientWidth;
+          if (nextScroll >= scrollWidth - 10) {
+            nextScroll = 0;
+          }
+          scrollRef.current.scrollTo({ left: nextScroll, behavior: 'smooth' });
+        }
+      }
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   // Auto-play with pause on hover and reset on interaction
   useEffect(() => {
@@ -76,10 +95,14 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
             </div>
           </div>
           
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+          {/* Grid / Carousel on mobile */}
+          <div 
+            ref={scrollRef}
+            className="flex md:grid flex-nowrap md:grid-cols-3 gap-5 items-stretch overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0 hide-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {/* Card 1 */}
-            <div className="brand-card flex flex-col h-full">
+            <div className="brand-card flex flex-col h-full min-w-[280px] w-full md:min-w-0 snap-start">
               <div className="relative h-48 w-full border-b border-line shrink-0">
                 <img 
                   src={impactImg1} 
@@ -96,7 +119,7 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
             </div>
             
             {/* Card 2 */}
-            <div className="brand-card flex flex-col h-full">
+            <div className="brand-card flex flex-col h-full min-w-[280px] w-full md:min-w-0 snap-start">
               <div className="relative h-48 w-full border-b border-line shrink-0">
                 <img 
                   src={impactImg2} 
@@ -113,7 +136,7 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
             </div>
 
             {/* Card 3 */}
-            <div className="brand-card flex flex-col h-full">
+            <div className="brand-card flex flex-col h-full min-w-[280px] w-full md:min-w-0 snap-start">
               <div className="relative h-48 w-full border-b border-line shrink-0">
                 <img 
                   src={impactImg3} 

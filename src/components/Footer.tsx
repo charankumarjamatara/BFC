@@ -29,26 +29,29 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="col-span-1 md:col-span-2 space-y-5">
-            <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Quick Links</h4>
-            <ul className="space-y-3 text-[14.5px] text-[#8e8e93]">
-              <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#activities" className="hover:text-white transition-colors">Activities</a></li>
-              <li><a href="#blogs" className="hover:text-white transition-colors">Blogs</a></li>
-              <li><a href="#donate" className="hover:text-coral transition-colors text-coral font-bold">Donate Now</a></li>
-            </ul>
-          </div>
+          {/* Quick Links & Programs Wrapper */}
+          <div className="col-span-1 md:col-span-4 grid grid-cols-2 gap-4 md:gap-8">
+            {/* Quick Links */}
+            <div className="space-y-5">
+              <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Quick Links</h4>
+              <ul className="space-y-3 text-[14.5px] text-[#8e8e93]">
+                <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#activities" className="hover:text-white transition-colors">Activities</a></li>
+                <li><a href="#blogs" className="hover:text-white transition-colors">Blogs</a></li>
+                <li><a href="#donate" className="hover:text-coral transition-colors text-coral font-bold">Donate Now</a></li>
+              </ul>
+            </div>
 
-          {/* Programs */}
-          <div className="col-span-1 md:col-span-2 space-y-5">
-            <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Programs</h4>
-            <ul className="space-y-3 text-[14.5px] text-[#8e8e93]">
-              <li><a href="#activities" className="hover:text-white transition-colors">Animal Rescue</a></li>
-              <li><a href="#activities" className="hover:text-white transition-colors">Feeding Drives</a></li>
-              <li><a href="#activities" className="hover:text-white transition-colors">Collar Drives</a></li>
-              <li><a href="#volunteer" className="hover:text-white transition-colors">Volunteering</a></li>
-            </ul>
+            {/* Programs */}
+            <div className="space-y-5">
+              <h4 className="font-display text-yellow text-[20px] uppercase tracking-[.02em]">Programs</h4>
+              <ul className="space-y-3 text-[14.5px] text-[#8e8e93]">
+                <li><a href="#activities" className="hover:text-white transition-colors">Animal Rescue</a></li>
+                <li><a href="#activities" className="hover:text-white transition-colors">Feeding Drives</a></li>
+                <li><a href="#activities" className="hover:text-white transition-colors">Collar Drives</a></li>
+                <li><a href="#volunteer" className="hover:text-white transition-colors">Volunteering</a></li>
+              </ul>
+            </div>
           </div>
 
           {/* Contact Details in Footer */}
