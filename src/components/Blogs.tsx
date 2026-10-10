@@ -1,33 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import SectionHeader from './SectionHeader';
 import blog1Img from '../assets/blogs/The Art Of Noticing.webp';
 import blog2Img from '../assets/blogs/This is a Positive Investment.webp';
 import blog3Img from '../assets/blogs/Indie Pup Looking for Home.webp';
+import InfiniteCarousel from './InfiniteCarousel';
 
 interface BlogsProps {
   onKnowMore?: () => void;
 }
 
 export default function Blogs({ onKnowMore }: BlogsProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        if (scrollWidth > clientWidth) {
-          let nextScroll = scrollLeft + clientWidth;
-          if (nextScroll >= scrollWidth - 10) {
-            nextScroll = 0;
-          }
-          scrollRef.current.scrollTo({ left: nextScroll, behavior: 'smooth' });
-        }
-      }
-    }, 3500);
-    
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section id="blogs" className="section-wrapper bg-bg">
       <div className="section-container">
@@ -37,13 +19,13 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
           headingParts={["Latest", "Stories"]}
         />
 
-        <div 
-          ref={scrollRef}
-          className="flex md:grid flex-nowrap md:grid-cols-3 gap-5 lg:gap-8 overflow-x-auto snap-x snap-mandatory pb-6 md:pb-0 hide-scrollbar"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        <InfiniteCarousel 
+          autoPlayInterval={3500} 
+          showControls={true}
+          itemClassName="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0"
         >
           
-          <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col min-w-[280px] w-full md:min-w-0 snap-start h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
+          <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col w-full h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
             <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
               <img 
                 src={blog1Img} 
@@ -65,7 +47,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
             </div>
           </article>
 
-          <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col min-w-[280px] w-full md:min-w-0 snap-start h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
+          <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col w-full h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
             <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
               <img 
                 src={blog2Img} 
@@ -87,7 +69,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
             </div>
           </article>
 
-          <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col min-w-[280px] w-full md:min-w-0 snap-start h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
+          <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col w-full h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
             <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
               <img 
                 src={blog3Img} 
@@ -109,7 +91,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
             </div>
           </article>
 
-        </div>
+        </InfiniteCarousel>
 
         <div className="mt-6 md:mt-10 flex justify-center">
           <button onClick={onKnowMore} className="btn-outline">

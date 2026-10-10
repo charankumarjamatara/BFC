@@ -2,8 +2,52 @@ import { defineConfig, type HtmlTagDescriptor, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
+import dotenv from 'dotenv'
+import { processNotification } from './api/send-notification.ts'
 
 import siteConfiguration from './.figma/make/site.json'
+
+// Load environment variables for local dev server
+dotenv.config()
+
+// Dev server notification middleware to handle POST /api/send-notification locally
+function devNotificationPlugin(): Plugin {
+  return {
+    name: 'dev-notification-middleware',
+    configureServer(server: any) {
+      server.middlewares.use(async (req: any, res: any, next: any) => {
+        const url = req.url?.split('?')[0];
+        if (url !== '/api/send-notification' && url !== '/BFC/api/send-notification') {
+          return next();
+        }
+
+        if (req.method !== 'POST') {
+          res.statusCode = 405;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Method not allowed' }));
+          return;
+        }
+
+        let body = '';
+        req.on('data', (chunk: any) => { body += chunk; });
+        req.on('end', async () => {
+          try {
+            const payload = JSON.parse(body || '{}');
+            const result = await processNotification(payload);
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(result));
+          } catch (err: any) {
+            console.error('Local notification server error:', err?.message || err);
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: err?.message || 'Server error' }));
+          }
+        });
+      });
+    }
+  };
+}
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -23,6 +67,7 @@ export default defineConfig(({ mode }) => {
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
       figmaMakeKitPlugin({ storiesGlob: '/src/**/*.stories.{ts,tsx,js,jsx}' }),
+      devNotificationPlugin(),
     ],
     resolve: {
       alias: {

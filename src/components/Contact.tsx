@@ -1,15 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, AlertCircle, Loader2 } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 
 export default function Contact() {
   const [contactFormSubmitted, setContactFormSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setContactFormSubmitted(true);
-    setTimeout(() => setContactFormSubmitted(false), 5000);
+    
+    if (!formRef.current) return;
+    
+    setIsLoading(true);
+    setSubmitError(null);
+
+    const formData = new FormData(formRef.current);
+    
+    const payload = {
+      type: 'contact',
+      data: {
+        name: formData.get('name') as string,
+        email: formData.get('email') as string,
+        subject: formData.get('subject') as string,
+        message: formData.get('message') as string,
+      }
+    };
+
+    try {
+      const response = await fetch(`${import.meta.env.BASE_URL}api/send-notification`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to send message');
+      }
+
+      setContactFormSubmitted(true);
+      formRef.current.reset();
+      setTimeout(() => setContactFormSubmitted(false), 5000);
+    } catch (error: any) {
+      console.error('FAILED...', error);
+      setSubmitError(error.message || 'Failed to send message. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -106,12 +147,19 @@ export default function Contact() {
               We Are Listening.
             </h3>
             
-            <form onSubmit={handleContactSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleContactSubmit} className="space-y-4">
+              {submitError && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4" />
+                  {submitError}
+                </div>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="ct-name" className="block text-[10px] font-bold text-muted uppercase tracking-[.12em] mb-2">Your Name</label>
                   <input 
                     id="ct-name"
+                    name="name"
                     type="text" 
                     required
                     placeholder="Your name"
@@ -123,6 +171,7 @@ export default function Contact() {
                   <label htmlFor="ct-email" className="block text-[10px] font-bold text-muted uppercase tracking-[.12em] mb-2">Email</label>
                   <input 
                     id="ct-email"
+                    name="email"
                     type="email" 
                     required
                     placeholder="you@email.com"
@@ -135,6 +184,7 @@ export default function Contact() {
                 <label htmlFor="ct-subject" className="block text-[10px] font-bold text-muted uppercase tracking-[.12em] mb-2">Subject</label>
                 <input 
                   id="ct-subject"
+                  name="subject"
                   type="text" 
                   placeholder="How can we help?"
                   className="w-full bg-bg border border-line-soft rounded-[12px] py-3.5 px-4 text-[14px] focus:outline-none focus:border-ink transition-colors text-ink placeholder:text-slate/60"
@@ -145,6 +195,7 @@ export default function Contact() {
                 <label htmlFor="ct-msg" className="block text-[10px] font-bold text-muted uppercase tracking-[.12em] mb-2">Your Message</label>
                 <textarea 
                   id="ct-msg"
+                  name="message"
                   rows={4}
                   required
                   placeholder="Tell us what is on your mind."
@@ -154,9 +205,17 @@ export default function Contact() {
 
               <button 
                 type="submit"
-                className="btn-outline mt-2"
+                disabled={isLoading}
+                className="btn-outline mt-2 flex items-center justify-center gap-2 min-w-[160px]"
               >
-                Send message
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send message'
+                )}
               </button>
             </form>
           </div>

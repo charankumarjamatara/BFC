@@ -26,7 +26,7 @@ export default function Hero({ onDonateClick }: HeroProps) {
       <div className="absolute inset-0 max-md:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0)_30%,rgba(0,0,0,0.55)_65%,rgba(0,0,0,0.85)_100%)] md:bg-gradient-to-r md:from-black/95 md:via-black/60 md:to-transparent z-10 pointer-events-none"></div>
 
       {/* Content Container aligned to master grid */}
-      <section className="section-container px-5 md:px-12 lg:px-0 relative z-20 pb-6 pt-[100px] md:pt-40 md:pb-24 w-full text-left">
+      <section className="section-container px-6 md:px-12 lg:px-0 relative z-20 pb-6 pt-[100px] md:pt-40 md:pb-24 w-full text-left">
         
         {/* Confine content to the left reading zone (approx 40% on desktop) */}
         <div className="w-full md:w-[50%] lg:w-[42%] flex flex-col justify-end gap-5 md:gap-0">

@@ -30,7 +30,7 @@ export default function Donate({ onDonateClick }: DonateProps) {
 
       {/* Single Urgency Card */}
       <div className="mb-10">
-        <div className="bg-ink rounded-[20px] p-7 lg:p-10 border border-line relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <div className="bg-ink rounded-[20px] p-6 lg:p-8 border border-line relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8">
           {/* Left side content */}
           <div className="md:w-1/2">
             <div className="flex justify-between items-center mb-5 md:justify-start md:gap-4">

@@ -16,7 +16,7 @@ export default function Volunteer() {
         <div className="grid lg:grid-cols-2 gap-6 items-stretch">
           
           {/* Left: Become a volunteer */}
-          <div className="brand-card p-7 md:p-10 flex flex-col justify-between bg-bg">
+          <div className="brand-card p-6 lg:p-8 flex flex-col justify-between bg-bg">
             <div className="space-y-4">
               <span className="eyebrow">
                 Volunteer Tribe
@@ -62,7 +62,7 @@ export default function Volunteer() {
           </div>
 
           {/* Right: What Our Volunteers Say */}
-          <div className="brand-card p-7 md:p-10 flex flex-col justify-center bg-surface">
+          <div className="brand-card p-6 lg:p-8 flex flex-col justify-center bg-surface">
             <h3 className="font-display text-[26px] text-ink mb-8 uppercase tracking-[.02em]">
               What Our Volunteers Say<span className="inline-block w-2.5 h-2.5 bg-yellow align-baseline ml-1"></span>
             </h3>

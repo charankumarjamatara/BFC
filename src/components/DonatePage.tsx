@@ -6,6 +6,7 @@ import { Mail, Phone, ArrowLeft, ArrowRight, Heart } from 'lucide-react';
 import impactImg1 from '../assets/Donate section/Weekly Feeding Drives.webp';
 import impactImg2 from '../assets/Donate section/Emergency Surgeries.webp';
 import impactImg3 from '../assets/Donate section/Vaccination Camp.webp';
+import qrCodeImg from '../assets/Donate section/QR code.jpeg';
 
 // Carousel Images
 import carouselImg1 from '../assets/Donate section/donate_carousel/IMG_1.webp';
@@ -315,34 +316,7 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
               <div className="flex flex-col items-start md:items-center">
                 <div className="brand-card p-5 bg-surface shadow-sm">
                   <div className="w-48 h-48 bg-bone flex items-center justify-center relative overflow-hidden rounded-[12px]">
-                    <svg className="w-full h-full text-ink" viewBox="0 0 100 100" fill="currentColor">
-                      <rect x="0" y="0" width="25" height="25" />
-                      <rect x="5" y="5" width="15" height="15" fill="white" />
-                      <rect x="9" y="9" width="7" height="7" />
-                      
-                      <rect x="75" y="0" width="25" height="25" />
-                      <rect x="80" y="5" width="15" height="15" fill="white" />
-                      <rect x="84" y="9" width="7" height="7" />
-                      
-                      <rect x="0" y="75" width="25" height="25" />
-                      <rect x="5" y="80" width="15" height="15" fill="white" />
-                      <rect x="8" y="84" width="8" height="8" />
-                      
-                      <rect x="35" y="10" width="10" height="15" />
-                      <rect x="55" y="5" width="15" height="10" />
-                      <rect x="35" y="35" width="30" height="10" />
-                      <rect x="10" y="45" width="15" height="20" />
-                      <rect x="40" y="60" width="15" height="15" />
-                      <rect x="80" y="40" width="15" height="25" />
-                      <rect x="65" y="75" width="10" height="15" />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="bg-surface p-1.5 rounded-[8px] border border-line-soft shadow-sm">
-                        <div className="bg-yellow w-6 h-6 flex items-center justify-center rounded-[6px] text-ink font-bold">
-                          <Heart className="w-3 h-3 fill-current"/>
-                        </div>
-                      </div>
-                    </div>
+                    <img src={qrCodeImg} alt="Donate QR Code" className="w-full h-full object-contain mix-blend-darken" />
                   </div>
                 </div>
                 <span className="font-sans text-[11px] uppercase tracking-[.16em] font-bold text-muted mt-5">

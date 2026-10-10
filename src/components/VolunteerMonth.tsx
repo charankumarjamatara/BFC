@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import volunteerImg from '../assets/volunteer.jpg';
+import volunteerImg from '../assets/volunteer of the month.jpeg';
 import SectionHeader from './SectionHeader';
 
 export default function VolunteerMonth() {
@@ -10,33 +10,52 @@ export default function VolunteerMonth() {
         
         <SectionHeader 
           eyebrow="Volunteer of the month"
-          headingParts={["Meet", "Maya"]}
+          headingParts={["Meet", "Neha & Siri"]}
         />
 
         {/* Card Split */}
         <div className="grid md:grid-cols-12 overflow-hidden border border-line rounded-[20px] bg-surface brand-card p-0">
           {/* Left Side: Photo */}
-          <div className="md:col-span-6 lg:col-span-7 relative aspect-[4/3]">
+          <div className="md:col-span-6 lg:col-span-7 h-full min-h-[350px] md:min-h-0 relative">
             <img 
               src={volunteerImg}
-              alt="Maya Prakash - Volunteer of the Month" 
-              className="absolute inset-0 w-full h-full object-cover"
+              alt="Neha and Siri - Volunteers of the Month" 
+              className="absolute inset-0 w-full h-full object-cover block"
             />
           </div>
 
           {/* Right Side: Ink Card */}
-          <div className="md:col-span-6 lg:col-span-5 bg-ink text-white p-8 lg:p-12 flex flex-col justify-between">
+          <div className="md:col-span-6 lg:col-span-5 bg-ink text-white p-6 lg:p-8 flex flex-col justify-between">
             <div>
-              <span className="eyebrow mb-4 !text-white !before:bg-yellow">July Spotlight</span>
+              <span className="eyebrow mb-6 !text-white !before:bg-yellow">July Spotlight</span>
               
-              <h3 className="font-display text-[clamp(32px,4vw,48px)] uppercase tracking-[.01em] leading-[.92] mb-4">
-                Maya<br />
-                <span className="text-yellow">Prakash</span>
-              </h3>
+              <div className="flex flex-col gap-6 mb-10">
+                {/* Neha */}
+                <div>
+                  <h3 className="font-display text-[clamp(32px,4vw,42px)] uppercase tracking-[.01em] leading-[.92] mb-1">
+                    Neha
+                  </h3>
+                  <div className="text-yellow text-[13px] tracking-widest uppercase font-bold mb-3">
+                    Adoption Coordinator
+                  </div>
+                  <p className="text-white/70 text-[15px] leading-relaxed">
+                    Neha works tirelessly to match every rescue with their perfect forever family, bringing hope to countless animals.
+                  </p>
+                </div>
 
-              <p className="text-white/70 text-[15px] leading-relaxed mb-10">
-                Maya shows up before work to walk, feed and calm the newest arrivals. Her gentleness gives them a reason to trust people again.
-              </p>
+                {/* Siri */}
+                <div>
+                  <h3 className="font-display text-[clamp(32px,4vw,42px)] uppercase tracking-[.01em] leading-[.92] mb-1">
+                    Siri
+                  </h3>
+                  <div className="text-yellow text-[13px] tracking-widest uppercase font-bold mb-3">
+                    Field Volunteer
+                  </div>
+                  <p className="text-white/70 text-[15px] leading-relaxed">
+                    Siri is always on the front lines, responding to rescue calls and providing immediate, compassionate care.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <a 

@@ -16,18 +16,56 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
-  const [activePage, setActivePage] = useState<'home' | 'team' | 'activities' | 'blogs' | 'donate'>('home');
+  const [activePage, setActivePage] = useState<'home' | 'team' | 'activities' | 'blogs' | 'donate'>(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (['team', 'activities', 'blogs', 'donate'].includes(hash)) {
+      return hash as any;
+    }
+    return 'home';
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activePage]);
 
+  useEffect(() => {
+    // Replace initial state so we have a valid state object
+    window.history.replaceState({ page: activePage }, '', window.location.hash || window.location.pathname);
+    
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.page) {
+        setActivePage(event.state.page);
+      } else {
+        const hash = window.location.hash.replace('#', '');
+        if (['team', 'activities', 'blogs', 'donate'].includes(hash)) {
+          setActivePage(hash as any);
+        } else {
+          setActivePage('home');
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = (page: 'home' | 'team' | 'activities' | 'blogs' | 'donate') => {
+    if (page !== activePage) {
+      if (page === 'home') {
+        window.history.pushState({ page }, '', window.location.pathname);
+      } else {
+        window.history.pushState({ page }, '', `#${page}`);
+      }
+      setActivePage(page);
+    }
+  };
+
   if (activePage === 'team') {
     return (
       <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth flex flex-col">
-        <Navbar onNavigate={setActivePage} />
+        <Navbar onNavigate={navigateTo} />
         <div className="flex-grow">
-          <MeetTeam onBack={() => setActivePage('home')} /> 
+          <MeetTeam onBack={() => navigateTo('home')} /> 
         </div>
         <Footer />
       </div>
@@ -37,9 +75,9 @@ export default function App() {
   if (activePage === 'activities') {
     return (
       <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth flex flex-col">
-        <Navbar onNavigate={setActivePage} />
+        <Navbar onNavigate={navigateTo} />
         <div className="flex-grow">
-          <ActivitiesPage onBack={() => setActivePage('home')} />
+          <ActivitiesPage onBack={() => navigateTo('home')} />
         </div>
         <Footer />
       </div>
@@ -49,9 +87,9 @@ export default function App() {
   if (activePage === 'blogs') {
     return (
       <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth flex flex-col">
-        <Navbar onNavigate={setActivePage} />
+        <Navbar onNavigate={navigateTo} />
         <div className="flex-grow">
-          <BlogsPage onBack={() => setActivePage('home')} />
+          <BlogsPage onBack={() => navigateTo('home')} />
         </div>
         <Footer />
       </div>
@@ -61,9 +99,9 @@ export default function App() {
   if (activePage === 'donate') {
     return (
       <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth flex flex-col">
-        <Navbar onNavigate={setActivePage} />
+        <Navbar onNavigate={navigateTo} />
         <div className="flex-grow">
-          <DonatePage onBack={() => setActivePage('home')} />
+          <DonatePage onBack={() => navigateTo('home')} />
         </div>
         <Footer />
       </div>
@@ -72,16 +110,16 @@ export default function App() {
 
   return (
     <div className="bg-bg text-ink overflow-x-hidden min-h-screen font-sans scroll-smooth">
-      <Navbar onNavigate={setActivePage} transparentOnTop={true} />
-      <Hero onDonateClick={() => setActivePage('donate')} />
+      <Navbar onNavigate={navigateTo} transparentOnTop={true} />
+      <Hero onDonateClick={() => navigateTo('donate')} />
       
       {/* About Us Section */}
-      <section id="about" className="section-wrapper border-t-0 pt-12 md:pt-16">
+      <section id="about" className="section-wrapper border-t-0">
         <div className="section-container">
           <CoreActivities />
           <div className="mt-12 flex justify-center">
             <button 
-              onClick={() => setActivePage('team')}
+              onClick={() => navigateTo('team')}
               className="btn-outline"
             >
               Know more about us
@@ -91,9 +129,9 @@ export default function App() {
       </section>
       
       <VolunteerMonth />
-      <Activities onKnowMore={() => setActivePage('activities')} />
-      <Blogs onKnowMore={() => setActivePage('blogs')} />
-      <Donate onDonateClick={() => setActivePage('donate')} />
+      <Activities onKnowMore={() => navigateTo('activities')} />
+      <Blogs onKnowMore={() => navigateTo('blogs')} />
+      <Donate onDonateClick={() => navigateTo('donate')} />
       <Adoption />
       <Volunteer />
       <Contact />

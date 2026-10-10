@@ -52,7 +52,7 @@ export default function Navbar({ onNavigate, transparentOnTop = false }: NavbarP
         ? 'bg-transparent border-b border-transparent' 
         : 'bg-bg/95 backdrop-blur-md border-b border-line-soft'
     }`}>
-      <div className="section-container px-5 md:px-12 lg:px-0 flex items-center justify-between w-full relative">
+      <div className="section-container px-6 md:px-12 lg:px-0 flex items-center justify-between w-full relative">
         {/* Brandmark */}
         <a href="#" onClick={() => handleNavClick()} className="flex items-center gap-2 md:gap-[10px] shrink-0 z-50">
           <img src={logoImg} alt="BFC Logo" className="h-[35px] md:h-[60px] w-auto" />
