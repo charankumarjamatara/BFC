@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
-function escapeHtml(input: string | number | undefined | null): string {
+function escapeHtml(input) {
   if (input === undefined || input === null) return '';
   return String(input)
     .replace(/&/g, '&amp;')
@@ -31,7 +31,7 @@ export function createSmtpTransporter() {
   });
 }
 
-export async function processNotification(payload: any) {
+export async function processNotification(payload) {
   const notificationRecipient = process.env.NOTIFICATION_EMAIL || 'charan.jamatara24@sasi.ac.in';
   const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
@@ -146,7 +146,7 @@ export async function processNotification(payload: any) {
       });
       console.log(`[SMTP SUCCESS] Sent email "${subject}" to ${notificationRecipient} (ID: ${info.messageId})`);
       return { success: true, method: 'smtp', messageId: info.messageId };
-    } catch (smtpErr: any) {
+    } catch (smtpErr) {
       console.warn('[SMTP WARNING] SMTP dispatch failed, falling back to FormSubmit:', smtpErr?.message || smtpErr);
     }
   }
@@ -176,13 +176,13 @@ export async function processNotification(payload: any) {
     const fsData = await fsResponse.json();
     console.log(`[FORMSUBMIT SUCCESS] Dispatched "${subject}" to ${notificationRecipient}:`, fsData);
     return { success: true, method: 'formsubmit', data: fsData };
-  } catch (fsErr: any) {
+  } catch (fsErr) {
     console.error('[FORMSUBMIT ERROR] FormSubmit dispatch failed:', fsErr?.message || fsErr);
     return { success: false, error: fsErr?.message || 'Email delivery failed' };
   }
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -190,7 +190,7 @@ export default async function handler(req: any, res: any) {
   try {
     const result = await processNotification(req.body);
     return res.status(200).json(result);
-  } catch (error: any) {
+  } catch (error) {
     console.error('Serverless notification error:', error?.message || error);
     return res.status(500).json({ error: error?.message || 'Internal error' });
   }
