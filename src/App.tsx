@@ -49,14 +49,14 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const navigateTo = (page: 'home' | 'team' | 'activities' | 'blogs' | 'donate') => {
+  const navigateTo = (page: string) => {
     if (page !== activePage) {
       if (page === 'home') {
         window.history.pushState({ page }, '', window.location.pathname);
       } else {
         window.history.pushState({ page }, '', `#${page}`);
       }
-      setActivePage(page);
+      setActivePage(page as any);
     }
   };
 
