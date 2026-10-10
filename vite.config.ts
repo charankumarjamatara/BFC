@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 import dotenv from 'dotenv'
-import { processNotification } from './api/send-notification.ts'
+import { processNotification } from './api/send-notification.js'
 
 import siteConfiguration from './.figma/make/site.json'
 
