@@ -31,7 +31,7 @@ export function createSmtpTransporter() {
   });
 }
 
-export async function processNotification(payload) {
+export async function processNotification(payload, reqOrigin = null) {
   const notificationRecipient = process.env.NOTIFICATION_EMAIL || 'charan.jamatara24@sasi.ac.in';
   const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
@@ -166,12 +166,14 @@ export async function processNotification(payload) {
     targets.push(notificationRecipient);
   }
 
+  const effectiveOrigin = reqOrigin || (process.env.VERCEL ? 'https://brutalityfreecommunity.vercel.app' : 'http://localhost:5174');
+
   const formSubmitHeaders = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    'Origin': 'http://localhost:5174',
-    'Referer': 'http://localhost:5174/'
+    'Origin': effectiveOrigin,
+    'Referer': `${effectiveOrigin.replace(/\/+$/, '')}/`
   };
 
   const formSubmitBody = JSON.stringify({
@@ -245,7 +247,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, error: 'Request body must be a valid JSON object.' });
     }
 
-    const result = await processNotification(payload);
+    const host = req.headers?.['x-forwarded-host'] || req.headers?.host;
+    const proto = req.headers?.['x-forwarded-proto'] || (req.headers?.['x-forwarded-ssl'] === 'on' ? 'https' : 'https');
+    const reqOrigin = host ? `${proto}://${host}` : null;
+
+    const result = await processNotification(payload, reqOrigin);
 
     if (!result.success) {
       return res.status(502).json(result);
