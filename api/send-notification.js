@@ -214,7 +214,7 @@ export async function processNotification(payload, reqOrigin = null) {
         lastError = fsData.message || fsData.error || `FormSubmit rejected with status ${fsResponse.status}`;
         console.warn(`[FORMSUBMIT WARNING] FormSubmit target ${target} returned:`, fsData);
       } else {
-        lastError = `FormSubmit target ${target} returned non-JSON response (HTTP ${fsResponse.status})`;
+        lastError = `FormSubmit target ${target} returned HTTP ${fsResponse.status}: ${rawText.slice(0, 150).replace(/\s+/g, ' ')}`;
       }
     } catch (fsErr) {
       lastError = fsErr?.message || 'FormSubmit request failed';
