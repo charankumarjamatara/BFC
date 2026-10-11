@@ -77,10 +77,10 @@ export default function Contact() {
         return;
       }
 
-      // If serverless API failed (e.g. SMTP credentials not configured and datacenter IP blocked by Cloudflare),
-      // attempt direct browser delivery to FormSubmit for charan.jamatara24@sasi.ac.in
+      // If serverless API failed (e.g. SMTP credentials not configured and datacenter IP challenged by Cloudflare),
+      // attempt direct browser delivery via token-based FormSubmit integration
       console.warn('Serverless dispatch unsuccessful, attempting client-side fallback:', result?.error);
-      const fsResponse = await fetch('https://formsubmit.co/ajax/charan.jamatara24@sasi.ac.in', {
+      const fsResponse = await fetch('https://formsubmit.co/ajax/6b71ac1f2f98c1c5c78b6be912a3c84d', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,6 +90,7 @@ export default function Contact() {
           _subject: `BFC Contact Form: ${subject || 'No Subject'}`,
           _replyto: email,
           _captcha: 'false',
+          _template: 'box',
           name,
           email,
           message
@@ -216,7 +217,13 @@ export default function Contact() {
               We Are Listening.
             </h3>
             
-            <form ref={formRef} onSubmit={handleContactSubmit} className="space-y-4">
+            <form 
+              ref={formRef} 
+              action="https://formsubmit.co/6b71ac1f2f98c1c5c78b6be912a3c84d" 
+              method="POST" 
+              onSubmit={handleContactSubmit} 
+              className="space-y-4"
+            >
               {submitError && (
                 <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />

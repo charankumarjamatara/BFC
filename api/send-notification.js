@@ -160,11 +160,7 @@ export async function processNotification(payload, reqOrigin = null) {
 
   // 2. Fallback: Direct email delivery via FormSubmit HTTP API
   const token = process.env.FORMSUBMIT_TOKEN || '6b71ac1f2f98c1c5c78b6be912a3c84d';
-  const targets = [];
-  if (token) targets.push(token);
-  if (notificationRecipient && !targets.includes(notificationRecipient)) {
-    targets.push(notificationRecipient);
-  }
+  const targets = [token];
 
   const effectiveOrigin = reqOrigin || (process.env.VERCEL ? 'https://brutalityfreecommunity.vercel.app' : 'http://localhost:5174');
 
