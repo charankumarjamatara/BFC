@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 import dotenv from 'dotenv'
-import { processNotification } from './api/send-notification.js'
 
 import siteConfiguration from './.figma/make/site.json'
 
@@ -14,6 +13,7 @@ dotenv.config()
 function devNotificationPlugin(): Plugin {
   return {
     name: 'dev-notification-middleware',
+    apply: 'serve',
     configureServer(server: any) {
       server.middlewares.use(async (req: any, res: any, next: any) => {
         const url = req.url?.split('?')[0];
@@ -24,7 +24,7 @@ function devNotificationPlugin(): Plugin {
         if (req.method !== 'POST') {
           res.statusCode = 405;
           res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'Method not allowed' }));
+          res.end(JSON.stringify({ success: false, error: 'Method not allowed' }));
           return;
         }
 
@@ -33,15 +33,16 @@ function devNotificationPlugin(): Plugin {
         req.on('end', async () => {
           try {
             const payload = JSON.parse(body || '{}');
+            const { processNotification } = await import('./api/send-notification.js');
             const result = await processNotification(payload);
-            res.statusCode = 200;
+            res.statusCode = result.success ? 200 : 502;
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(result));
           } catch (err: any) {
             console.error('Local notification server error:', err?.message || err);
             res.statusCode = 500;
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ error: err?.message || 'Server error' }));
+            res.end(JSON.stringify({ success: false, error: err?.message || 'Server error' }));
           }
         });
       });

@@ -41,10 +41,17 @@ export async function processNotification(payload) {
   let text = '';
   let html = '';
 
-  if (payload.type === 'contact') {
-    const { name, email, subject: msgSubject, message } = payload.data || {};
+  if (payload?.type === 'contact') {
+    // Support both flat payload { type, name, email, subject, message }
+    // and nested payload { type, data: { name, email, subject, message } }
+    const data = payload.data || payload;
+    const name = data.name;
+    const email = data.email;
+    const msgSubject = data.subject;
+    const message = data.message;
+
     if (!name?.trim() || !email?.trim() || !message?.trim()) {
-      throw new Error('Missing contact form fields');
+      throw new Error('Missing contact form fields (name, email, or message)');
     }
 
     subject = `BFC Contact Form: ${msgSubject?.trim() || 'No Subject'}`;
@@ -152,46 +159,101 @@ export async function processNotification(payload) {
   }
 
   // 2. Fallback: Direct email delivery via FormSubmit HTTP API
-  const token = process.env.FORMSUBMIT_TOKEN || '6b71ac1f2f98c1c5c78b6be912a3c84d'; // Reused GearStation token as default fallback per instructions
-  const formSubmitUrl = `https://formsubmit.co/ajax/${token}`;
-
-  try {
-    const fsResponse = await fetch(formSubmitUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Origin': 'http://localhost:5174',
-        'Referer': 'http://localhost:5174/'
-      },
-      body: JSON.stringify({
-        _subject: subject,
-        _replyto: replyTo,
-        _captcha: 'false',
-        _template: 'box',
-        Message_Content: text
-      })
-    });
-
-    const fsData = await fsResponse.json();
-    console.log(`[FORMSUBMIT SUCCESS] Dispatched "${subject}" to ${notificationRecipient}:`, fsData);
-    return { success: true, method: 'formsubmit', data: fsData };
-  } catch (fsErr) {
-    console.error('[FORMSUBMIT ERROR] FormSubmit dispatch failed:', fsErr?.message || fsErr);
-    return { success: false, error: fsErr?.message || 'Email delivery failed' };
+  const token = process.env.FORMSUBMIT_TOKEN || '6b71ac1f2f98c1c5c78b6be912a3c84d';
+  const targets = [];
+  if (token) targets.push(token);
+  if (notificationRecipient && !targets.includes(notificationRecipient)) {
+    targets.push(notificationRecipient);
   }
+
+  const formSubmitHeaders = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Origin': 'http://localhost:5174',
+    'Referer': 'http://localhost:5174/'
+  };
+
+  const formSubmitBody = JSON.stringify({
+    _subject: subject,
+    _replyto: replyTo,
+    _captcha: 'false',
+    _template: 'box',
+    name: payload.name || payload.data?.name || 'Contact Sender',
+    email: replyTo,
+    Message_Content: text
+  });
+
+  let lastError = 'Email delivery failed';
+
+  for (const target of targets) {
+    const formSubmitUrl = `https://formsubmit.co/ajax/${encodeURIComponent(target)}`;
+    try {
+      const fsResponse = await fetch(formSubmitUrl, {
+        method: 'POST',
+        headers: formSubmitHeaders,
+        body: formSubmitBody
+      });
+
+      const rawText = await fsResponse.text();
+      let fsData = null;
+      try {
+        fsData = JSON.parse(rawText);
+      } catch {
+        console.warn(`[FORMSUBMIT] Non-JSON response received from ${formSubmitUrl}: status=${fsResponse.status}`);
+      }
+
+      if (fsData && (fsData.success === 'true' || fsData.success === true)) {
+        console.log(`[FORMSUBMIT SUCCESS] Dispatched "${subject}" to ${notificationRecipient} via target ${target}:`, fsData);
+        return { success: true, method: 'formsubmit', target, data: fsData };
+      }
+
+      if (fsData) {
+        lastError = fsData.message || fsData.error || `FormSubmit rejected with status ${fsResponse.status}`;
+        console.warn(`[FORMSUBMIT WARNING] FormSubmit target ${target} returned:`, fsData);
+      } else {
+        lastError = `FormSubmit target ${target} returned non-JSON response (HTTP ${fsResponse.status})`;
+      }
+    } catch (fsErr) {
+      lastError = fsErr?.message || 'FormSubmit request failed';
+      console.error(`[FORMSUBMIT ERROR] Target ${target} request failed:`, lastError);
+    }
+  }
+
+  return { success: false, error: lastError };
 }
 
 export default async function handler(req, res) {
+  // Ensure JSON response header
+  res.setHeader('Content-Type', 'application/json');
+
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ success: false, error: 'Method not allowed. Only POST is accepted.' });
   }
 
   try {
-    const result = await processNotification(req.body);
+    let payload = req.body;
+    if (typeof payload === 'string') {
+      try {
+        payload = JSON.parse(payload);
+      } catch {
+        return res.status(400).json({ success: false, error: 'Invalid JSON payload received.' });
+      }
+    }
+
+    if (!payload || typeof payload !== 'object') {
+      return res.status(400).json({ success: false, error: 'Request body must be a valid JSON object.' });
+    }
+
+    const result = await processNotification(payload);
+
+    if (!result.success) {
+      return res.status(502).json(result);
+    }
+
     return res.status(200).json(result);
   } catch (error) {
     console.error('Serverless notification error:', error?.message || error);
-    return res.status(500).json({ error: error?.message || 'Internal error' });
+    return res.status(500).json({ success: false, error: error?.message || 'Internal notification dispatch error.' });
   }
 }

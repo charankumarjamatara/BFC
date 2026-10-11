@@ -12,34 +12,66 @@ export default function Contact() {
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!formRef.current) return;
+    if (!formRef.current || isLoading) return;
     
     setIsLoading(true);
     setSubmitError(null);
 
     const formData = new FormData(formRef.current);
-    
+    const name = (formData.get('name') as string || '').trim();
+    const email = (formData.get('email') as string || '').trim();
+    const subject = (formData.get('subject') as string || '').trim();
+    const message = (formData.get('message') as string || '').trim();
+
+    if (!name || !email || !message) {
+      setSubmitError('Please fill in all required fields.');
+      setIsLoading(false);
+      return;
+    }
+
     const payload = {
       type: 'contact',
+      name,
+      email,
+      subject,
+      message,
       data: {
-        name: formData.get('name') as string,
-        email: formData.get('email') as string,
-        subject: formData.get('subject') as string,
-        message: formData.get('message') as string,
+        name,
+        email,
+        subject,
+        message
       }
     };
 
     try {
-      const response = await fetch(`${import.meta.env.BASE_URL}api/send-notification`, {
+      const response = await fetch('/api/send-notification', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify(payload)
       });
 
-      const result = await response.json();
+      const contentType = response.headers.get('content-type') || '';
+      const rawBody = await response.text();
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || 'Failed to send message');
+      let result: any = null;
+      if (contentType.includes('application/json')) {
+        try {
+          result = rawBody ? JSON.parse(rawBody) : null;
+        } catch {
+          throw new Error('Server returned an invalid JSON response.');
+        }
+      } else {
+        console.error('Non-JSON response received:', response.status, rawBody.slice(0, 150));
+        throw new Error(
+          `Server returned an invalid response (HTTP ${response.status}). Please try again later or contact us at brutalityfreecommunity@gmail.com.`
+        );
+      }
+
+      if (!response.ok || !result || !result.success) {
+        throw new Error(result?.error || result?.message || `Failed to send message (HTTP ${response.status})`);
       }
 
       setContactFormSubmitted(true);
