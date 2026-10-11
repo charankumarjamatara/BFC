@@ -70,13 +70,50 @@ export default function Contact() {
         );
       }
 
-      if (!response.ok || !result || !result.success) {
-        throw new Error(result?.error || result?.message || `Failed to send message (HTTP ${response.status})`);
+      if (response.ok && result?.success) {
+        setContactFormSubmitted(true);
+        formRef.current.reset();
+        setTimeout(() => setContactFormSubmitted(false), 5000);
+        return;
       }
 
-      setContactFormSubmitted(true);
-      formRef.current.reset();
-      setTimeout(() => setContactFormSubmitted(false), 5000);
+      // If serverless API failed (e.g. SMTP credentials not configured and datacenter IP blocked by Cloudflare),
+      // attempt direct browser delivery to FormSubmit for charan.jamatara24@sasi.ac.in
+      console.warn('Serverless dispatch unsuccessful, attempting client-side fallback:', result?.error);
+      const fsResponse = await fetch('https://formsubmit.co/ajax/charan.jamatara24@sasi.ac.in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `BFC Contact Form: ${subject || 'No Subject'}`,
+          _replyto: email,
+          _captcha: 'false',
+          name,
+          email,
+          message
+        })
+      });
+
+      const fsContentType = fsResponse.headers.get('content-type') || '';
+      const fsRaw = await fsResponse.text();
+      let fsData: any = null;
+      try {
+        fsData = JSON.parse(fsRaw);
+      } catch {
+        console.warn('FormSubmit returned non-JSON:', fsResponse.status, fsRaw.slice(0, 100));
+      }
+
+      if (fsResponse.ok && fsData && (fsData.success === 'true' || fsData.success === true)) {
+        setContactFormSubmitted(true);
+        formRef.current.reset();
+        setTimeout(() => setContactFormSubmitted(false), 5000);
+        return;
+      }
+
+      // If both server and client fallbacks fail:
+      throw new Error(fsData?.message || result?.error || 'Failed to deliver message. Please try again or email brutalityfreecommunity@gmail.com.');
     } catch (error: any) {
       console.error('FAILED...', error);
       setSubmitError(error.message || 'Failed to send message. Please try again.');
