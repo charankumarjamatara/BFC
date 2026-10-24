@@ -13,23 +13,23 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
   return (
     <section id="blogs" className="section-wrapper bg-bg">
       <div className="section-container">
-        
-        <SectionHeader 
+
+        <SectionHeader
           eyebrow="From Our Blogs"
           headingParts={["Latest", "Stories"]}
         />
 
-        <InfiniteCarousel 
-          autoPlayInterval={3500} 
+        <InfiniteCarousel
+          autoPlayInterval={3500}
           showControls={true}
           itemClassName="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0"
         >
-          
+
           <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col w-full h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
             <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
-              <img 
-                src={blog1Img} 
-                alt="The Art Of Noticing" 
+              <img
+                src={blog1Img}
+                alt="The Art Of Noticing"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -49,9 +49,9 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
 
           <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col w-full h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
             <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
-              <img 
-                src={blog2Img} 
-                alt="Positive Investment" 
+              <img
+                src={blog2Img}
+                alt="Positive Investment"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -71,9 +71,9 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
 
           <article className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col w-full h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-pointer group">
             <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
-              <img 
-                src={blog3Img} 
-                alt="Looking for Home" 
+              <img
+                src={blog3Img}
+                alt="Looking for Home"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -95,7 +95,7 @@ export default function Blogs({ onKnowMore }: BlogsProps) {
 
         <div className="mt-6 md:mt-10 flex justify-center">
           <button onClick={onKnowMore} className="btn-outline">
-            Know More
+            See Blogs
           </button>
         </div>
       </div>

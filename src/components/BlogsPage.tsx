@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, Search } from 'lucide-react';
+import BlogCarousel from './BlogCarousel';
 import blog1Img from '../assets/blogs/The Art Of Noticing.webp';
 import blog2Img from '../assets/blogs/This is a Positive Investment.webp';
 import blog3Img from '../assets/blogs/Indie Pup Looking for Home.webp';
@@ -80,7 +81,7 @@ export default function BlogsPage({ onBack }: { onBack?: () => void }) {
           {/* HEADER INTRODUCTION */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-12 mb-10 md:mb-14">
             <div className="w-full md:w-1/2">
-              <span className="eyebrow mb-2 block text-[#E53E3E]">Read our stories</span>
+              <span className="eyebrow mb-2 block">Read our stories</span>
               <h1 className="font-display text-[clamp(40px,6.5vw,72px)] text-ink uppercase leading-[.92] tracking-[.01em]">
                 Blogs<span className="inline-block w-3 h-3 md:w-4 md:h-4 bg-yellow align-baseline ml-1.5 md:ml-2"></span>
               </h1>
@@ -94,60 +95,19 @@ export default function BlogsPage({ onBack }: { onBack?: () => void }) {
                   placeholder="Search blogs..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 bg-white border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#E53E3E]/20 focus:border-[#E53E3E] transition-all text-[15px] shadow-sm text-ink placeholder-muted"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white border border-gray-200 rounded-full outline-none focus:outline-none hover:border-[#FFD400] focus:border-[#FFD400] focus:ring-2 focus:ring-[#FFD400] active:border-[#FFD400] transition-all text-[15px] shadow-sm text-ink placeholder-muted"
                 />
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
               </div>
             </div>
           </div>
           
-          {/* 3-COLUMN TILE GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            
-            {filteredBlogs.length > 0 ? (
-              filteredBlogs.map((blog) => (
-                <article key={blog.id} className="bg-white border border-gray-100 rounded-[12px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col h-full hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 group cursor-pointer">
-                  
-                  {/* IMAGE TOP */}
-                  <div className="relative w-full h-[220px] shrink-0 overflow-hidden">
-                    <img 
-                      src={blog.image} 
-                      alt={blog.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    />
-                  </div>
-                  
-                  {/* CONTENT BOTTOM */}
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[#E53E3E] text-[13px] font-bold uppercase tracking-wide">{blog.category}</span>
-                      <span className="text-muted text-[13px]">{blog.date}</span>
-                    </div>
-                    
-                    <h2 className="font-display text-[22px] text-ink leading-[1.2] mb-3 line-clamp-2">
-                      {blog.title}
-                    </h2>
-                    
-                    <p className="text-muted text-[15px] leading-relaxed line-clamp-3">
-                      {blog.description}
-                    </p>
-                  </div>
-                  
-                </article>
-              ))
-            ) : (
-              <div className="col-span-full py-20 text-center flex flex-col items-center">
-                <p className="text-muted text-[18px] mb-4">No blogs found matching "{searchQuery}"</p>
-                <button 
-                  onClick={() => setSearchQuery('')}
-                  className="px-6 py-2 bg-bg border border-line-soft rounded-full text-ink font-medium text-[14px] hover:bg-surface transition-colors"
-                >
-                  Clear Search
-                </button>
-              </div>
-            )}
-
-          </div>
+          {/* HORIZONTAL BLOG CAROUSEL */}
+          <BlogCarousel 
+            blogs={filteredBlogs} 
+            searchQuery={searchQuery} 
+            onClearSearch={() => setSearchQuery('')} 
+          />
           
         </div>
       </section>

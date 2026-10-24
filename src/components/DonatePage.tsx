@@ -78,13 +78,50 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
   return (
     <div className="w-full flex flex-col animate-fade-in bg-bg pt-20 md:pt-24">
       
-      {/* 1. IMPACT OF DONATIONS */}
-      <section className="section-wrapper bg-bg !pt-8 md:!pt-12">
+      {/* 1. DONATE QR SECTION */}
+      <section className="section-wrapper border-t-0 bg-surface !pt-6 md:!pt-8 !pb-12 md:!pb-16">
         <div className="section-container">
           
-          <button onClick={onBack} className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted hover:text-ink transition-colors mb-10 md:mb-14 cursor-pointer">
+          <button 
+            onClick={onBack} 
+            className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted hover:text-ink transition-colors mb-8 md:mb-10 cursor-pointer"
+          >
             <ArrowLeft className="w-4 h-4" /> Back to Home
           </button>
+          
+          <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-16 items-center">
+            
+            <div className="w-full md:w-[60%] text-left">
+              <span className="eyebrow mb-4">Donate</span>
+              <h2 className="font-display text-[clamp(40px,6vw,68px)] text-ink uppercase leading-[.92] tracking-[.01em] mb-5">
+                Your Support<br />Gives Them<br />A <span className="bg-yellow px-1 inline-block mt-1 box-decoration-clone">Second Chance.</span>
+              </h2>
+              <p className="text-muted text-[16px] leading-relaxed max-w-sm">
+                Scan the QR code to make a secure donation directly to our medical fund.
+              </p>
+            </div>
+            
+            <div className="w-full md:w-[40%] flex justify-start md:justify-end shrink-0">
+              <div className="flex flex-col items-start md:items-center">
+                <div className="brand-card p-5 bg-surface shadow-sm">
+                  <div className="w-48 h-48 bg-bone flex items-center justify-center relative overflow-hidden rounded-[12px]">
+                    <img src={qrCodeImg} alt="Donate QR Code" className="w-full h-full object-contain mix-blend-darken" />
+                  </div>
+                </div>
+                <span className="font-sans text-[11px] uppercase tracking-[.16em] font-bold text-muted mt-5">
+                  Scan to donate
+                </span>
+              </div>
+            </div>
+            
+          </div>
+
+        </div>
+      </section>
+
+      {/* 2. IMPACT OF DONATIONS */}
+      <section className="section-wrapper bg-bg">
+        <div className="section-container">
           
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 text-left">
@@ -157,7 +194,7 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
         </div>
       </section>
 
-      {/* 2. OUR GALLERY */}
+      {/* 3. OUR GALLERY */}
       <section className="section-wrapper bg-surface border-y border-line-soft">
         <div className="section-container">
           
@@ -249,7 +286,7 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
         </div>
       </section>
 
-      {/* 3. EMERGENCY RESCUE */}
+      {/* 4. EMERGENCY RESCUE */}
       <section className="section-wrapper bg-bg border-b border-line-soft">
         <div className="section-container">
           
@@ -289,40 +326,6 @@ export default function DonatePage({ onBack }: { onBack?: () => void }) {
                   <div className="font-bold text-[16px] md:text-[18px] text-ink">+91 90089 12829</div>
                 </div>
               </a>
-            </div>
-            
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. DONATE */}
-      <section className="section-wrapper bg-surface">
-        <div className="section-container">
-          
-          <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-16 items-center">
-            
-            <div className="w-full md:w-[60%] text-left">
-              <span className="eyebrow mb-4">Donate</span>
-              <h2 className="font-display text-[clamp(40px,6vw,68px)] text-ink uppercase leading-[.92] tracking-[.01em] mb-5">
-                Your Support<br />Gives Them<br />A <span className="bg-yellow px-1 inline-block mt-1 box-decoration-clone">Second Chance.</span>
-              </h2>
-              <p className="text-muted text-[16px] leading-relaxed max-w-sm">
-                Scan the QR code to make a secure donation directly to our medical fund.
-              </p>
-            </div>
-            
-            <div className="w-full md:w-[40%] flex justify-start md:justify-end shrink-0">
-              <div className="flex flex-col items-start md:items-center">
-                <div className="brand-card p-5 bg-surface shadow-sm">
-                  <div className="w-48 h-48 bg-bone flex items-center justify-center relative overflow-hidden rounded-[12px]">
-                    <img src={qrCodeImg} alt="Donate QR Code" className="w-full h-full object-contain mix-blend-darken" />
-                  </div>
-                </div>
-                <span className="font-sans text-[11px] uppercase tracking-[.16em] font-bold text-muted mt-5">
-                  Scan to donate
-                </span>
-              </div>
             </div>
             
           </div>
